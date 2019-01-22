@@ -1,0 +1,143 @@
+body {
+  color: white;
+  font-size: 20px;
+  font-family: helvetica;
+  background-color: royalblue;
+  /* background-image: url("https://cdn.vox-cdn.com/uploads/chorus_asset/file/10675355/The_Verge_Cubeometry_Wallpaper_Landscape.0.png"); */
+  background-size: 100%;
+}
+
+.backdrop {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  background: rgba(200, 200, 200, 0.2);
+}
+
+.backdrop p {
+  text-align: center;
+  margin: 100px 0;
+  padding: 100px 0;
+  font-size: 5em;
+  font-weight: bolder;
+  background-color: black;
+  border-color: darkred;
+  border-style: solid;
+  border-width: 5px;
+  cursor: pointer;
+}
+
+.cardTable {
+  padding: 15px;
+}
+
+.hide {
+  display: none;
+}
+
+button.btn {
+  width: 100px;
+  height: 100px;
+  border-color: darkgreen;
+  border-radius: 10px;
+  background: green;
+  color: white;
+  font-size: 20px;
+}
+
+button.btnDisabled {
+  width: 100px;
+  height: 100px;
+  border-color: darkgreen;
+  border-radius: 10px;
+  background: lightgreen;
+  color: darkgrey;
+  font-size: 20px;
+}
+
+button.btn:hover {
+  background: lightgreen;
+  color: darkgrey;
+}
+
+.mid {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.gutter {
+  height: 200px;
+  background-color: darkgreen;
+}
+
+button.bet {
+  width: 100px;
+  height: 100px;
+  background: lightgray;
+  color: black;
+  font-size: 20px;
+  font-weight: bolder;
+  border-radius: 50px;
+  border: 8.5px dashed rgb(37, 18, 18);
+  margin: 4px;
+}
+
+button.bet:hover {
+  border-color: gray;
+  color: white;
+  width: 110px;
+  height: 110px;
+}
+
+button.bet2_5 {
+  background-color: green;
+}
+
+button.bet5 {
+  background-color: royalblue;
+}
+
+button.bet10 {
+  background-color: red;
+}
+
+button.bet25 {
+  background-color: goldenrod;
+}
+button.betDisabled {
+  width: 100px;
+  height: 100px;
+  background: lightgray;
+  color: black;
+  font-size: 20px;
+  font-weight: bolder;
+  border-radius: 50px;
+  border: 8px dashed gray;
+  margin: 4px;
+  color: gray;
+}
+
+.space {
+  width: 100px;
+}
+
+.numDisplay {
+  background: rgb(57, 63, 136);
+  padding: 10px 60px;
+  border-radius: 10px;
+  border-color: whitesmoke;
+  opacity: 0.95;
+}
+
+.totalDisplay {
+  background: rgb(57, 63, 136);
+  padding: 20px 280px;
+  border-radius: 25px;
+  opacity: 0.95;
+}
+
+.login {
+  background-color: teal;
+}

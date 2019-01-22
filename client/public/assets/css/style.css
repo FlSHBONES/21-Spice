@@ -1,0 +1,35 @@
+html,body,h1,h2,h3,h4,h5 {
+    font-family: "Raleway", sans-serif
+}
+
+.title-bar {
+    height: 75px;
+}
+#bjack-logo {
+    width: 125px;
+}
+
+#bjack-title {
+    font-size: 36px
+}
+.player-box {
+    padding-bottom: 25% !important
+}
+
+#main-app {
+    height: 500px;
+}
+
+body {
+    background-image: url("./assets/img/FH_Gaming_Main-new.jpg"); 
+    background-size: cover
+}
+
+.stats-box,
+.chat-box {
+    background-color: aliceblue;
+}
+
+.progress-bar {
+    margin: 25px;
+}
