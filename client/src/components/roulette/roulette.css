@@ -1,0 +1,15 @@
+.roulette {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+  
+  .roulette-container {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    position: relative;
+    top: -200px;
+  }
+  
