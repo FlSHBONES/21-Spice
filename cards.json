@@ -1,0 +1,521 @@
+[
+  {
+    "code": "AS",
+
+    "suit": "SPADES",
+    "value": "ACE",
+    "cardValue": "1",
+    "images": {
+      "png": "./assets/img/vicecards/AS.png"
+    }
+  },
+  {
+    "code": "2S",
+
+    "suit": "SPADES",
+    "value": "2",
+    "cardValue": "2",
+    "images": {
+      "png": "./assets/img/vicecards/2S.png"
+    }
+  },
+  { 
+    "code": "3S",
+
+    "suit": "SPADES",
+    "value": "3",
+    "cardValue": "3",
+    "images": {
+      "png": "./assets/img/vicecards/3S.png"
+    }
+  },
+  {
+    "code": "4S",
+
+    "suit": "SPADES",
+    "value": "4",
+    "cardValue": "4",
+    "images": {
+      "png": "./assets/img/vicecards/4S.png"
+    }
+  },
+  {
+    "code": "5S",
+
+    "suit": "SPADES",
+    "value": "5",
+    "cardValue": "5",
+    "images": {
+      "png": "./assets/img/vicecards/5S.png"
+    }
+  },
+  {
+    "code": "6S",
+
+    "suit": "SPADES",
+    "value": "6",
+    "cardValue": "6",
+    "images": {
+      "png": "./assets/img/vicecards/6S.png"
+    }
+  },
+  {
+    "code": "7S",
+
+    "suit": "SPADES",
+    "value": "7",
+    "cardValue": "7",
+    "images": {
+      "png": "./assets/img/vicecards/7S.png"
+    }
+  },
+  {
+    "code": "8S",
+
+    "suit": "SPADES",
+    "value": "8",
+    "cardValue": "8",
+    "images": {
+      "png": "./assets/img/vicecards/8S.png"
+    }
+  },
+  {
+    "code": "9S",
+
+    "suit": "SPADES",
+    "value": "9",
+    "cardValue": "9",
+    "images": {
+      "png": "./assets/img/vicecards/9S.png"
+    }
+  },
+  {
+    "code": "0S",
+
+    "suit": "SPADES",
+    "value": "10",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/10S.png"
+    }
+  },
+  {
+    "code": "JS",
+
+    "suit": "SPADES",
+    "value": "JACK",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/JS.png"
+    }
+  },
+  {
+    "code": "QS",
+
+    "suit": "SPADES",
+    "value": "QUEEN",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/QS.png"
+    }
+  },
+  {
+    "code": "KS",
+
+    "suit": "SPADES",
+    "value": "KING",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/KS.png"
+    }
+  },
+  {
+    "code": "AD",
+
+    "suit": "DIAMONDS",
+    "value": "ACE",
+    "cardValue": "1",
+    "images": {
+      "png": "./assets/img/vicecards/AD.png"
+    }
+  },
+  {
+    "code": "2D",
+
+    "suit": "DIAMONDS",
+    "value": "2",
+    "cardValue": "2",
+    "images": {
+      "png": "./assets/img/vicecards/2D.png"
+    }
+  },
+  {
+    "code": "3D",
+    "suit": "DIAMONDS",
+    "value": "3",
+    "cardValue": "3",
+    "images": {
+      "png": "./assets/img/vicecards/3D.png"
+    }
+  },
+  {
+    "code": "4D",
+
+    "suit": "DIAMONDS",
+    "value": "4",
+    "cardValue": "4",
+    "images": {
+      "png": "./assets/img/vicecards/4D.png"
+    }
+  },
+  {
+    "code": "5D",
+
+    "suit": "DIAMONDS",
+    "value": "5",
+    "cardValue": "5",
+    "images": {
+      "png": "./assets/img/vicecards/5D.png"
+    }
+  },
+  {
+    "code": "6D",
+
+    "suit": "DIAMONDS",
+    "value": "6",
+    "cardValue": "6",
+    "images": {
+      "png": "./assets/img/vicecards/6D.png"
+    }
+  },
+  {
+    "code": "7D",
+
+    "suit": "DIAMONDS",
+    "value": "7",
+    "cardValue": "7",
+    "images": {
+      "png": "./assets/img/vicecards/7D.png"
+    }
+  },
+  {
+    "code": "8D",
+
+    "suit": "DIAMONDS",
+    "value": "8",
+    "cardValue": "8",
+    "images": {
+      "png": "./assets/img/vicecards/8D.png"
+    }
+  },
+  {
+    "code": "9D",
+
+    "suit": "DIAMONDS",
+    "value": "9",
+    "cardValue": "9",
+    "images": {
+      "png": "./assets/img/vicecards/9D.png"
+    }
+  },
+  {
+    "code": "0D",
+
+    "suit": "DIAMONDS",
+    "value": "10",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/10D.png"
+    }
+  },
+  {
+    "code": "JD",
+
+    "suit": "DIAMONDS",
+    "value": "JACK",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/JD.png"
+    }
+  },
+  {
+    "code": "QD",
+
+    "suit": "DIAMONDS",
+    "value": "QUEEN",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/QD.png"
+    }
+  },
+  {
+    "code": "KD",
+
+    "suit": "DIAMONDS",
+    "value": "KING",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/KD.png"
+    }
+  },
+  {
+    "code": "AC",
+
+    "suit": "CLUBS",
+    "value": "ACE",
+    "cardValue": "1",
+    "images": {
+      "png": "./assets/img/vicecards/AC.png"
+    }
+  },
+  {
+    "code": "2C",
+
+    "suit": "CLUBS",
+    "value": "2",
+    "cardValue": "2",
+    "images": {
+      "png": "./assets/img/vicecards/2C.png"
+    }
+  },
+  {
+    "code": "3C",
+
+    "suit": "CLUBS",
+    "value": "3",
+    "cardValue": "3",
+    "images": {
+      "png": "./assets/img/vicecards/3C.png"
+    }
+  },
+  {
+    "code": "4C",
+
+    "suit": "CLUBS",
+    "value": "4",
+    "cardValue": "4",
+    "images": {
+      "png": "./assets/img/vicecards/4C.png"
+    }
+  },
+  {
+    "code": "5C",
+
+    "suit": "CLUBS",
+    "value": "5",
+    "cardValue": "5",
+    "images": {
+      "png": "./assets/img/vicecards/5C.png"
+    }
+  },
+  {
+    "code": "6C",
+
+    "suit": "CLUBS",
+    "value": "6",
+    "cardValue": "6",
+    "images": {
+      "png": "./assets/img/vicecards/6C.png"
+    }
+  },
+  {
+    "code": "7C",
+
+    "suit": "CLUBS",
+    "value": "7",
+    "cardValue": "7",
+    "images": {
+      "png": "./assets/img/vicecards/7C.png"
+    }
+  },
+  {
+    "code": "8C",
+
+    "suit": "CLUBS",
+    "value": "8",
+    "cardValue": "8",
+    "images": {
+      "png": "./assets/img/vicecards/8C.png"
+    }
+  },
+  {
+    "code": "9C",
+
+    "suit": "CLUBS",
+    "value": "9",
+    "cardValue": "9",
+    "images": {
+      "png": "./assets/img/vicecards/9C.png"
+    }
+  },
+  {
+    "code": "0C",
+
+    "suit": "CLUBS",
+    "value": "10",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/10C.png"
+    }
+  },
+  {
+    "code": "JC",
+
+    "suit": "CLUBS",
+    "value": "JACK",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/JC.png"
+    }
+  },
+  {
+    "code": "QC",
+
+    "suit": "CLUBS",
+    "value": "QUEEN",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/QC.png"
+    }
+  },
+  {
+    "code": "KC",
+
+    "suit": "CLUBS",
+    "value": "KING",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/KC.png"
+    }
+  },
+  {
+    "code": "AH",
+
+    "suit": "HEARTS",
+    "value": "ACE",
+    "cardValue": "1",
+    "images": {
+      "png": "./assets/img/vicecards/AH.png"
+    }
+  },
+  {
+    "code": "2H",
+
+    "suit": "HEARTS",
+    "value": "2",
+    "cardValue": "2",
+    "images": {
+      "png": "./assets/img/vicecards/2H.png"
+    }
+  },
+  {
+    "code": "3H",
+
+    "suit": "HEARTS",
+    "value": "3",
+    "cardValue": "3",
+    "images": {
+      "png": "./assets/img/vicecards/3H.png"
+    }
+  },
+  {
+    "code": "4H",
+
+    "suit": "HEARTS",
+    "value": "4",
+    "cardValue": "4",
+    "images": {
+      "png": "./assets/img/vicecards/4H.png"
+    }
+  },
+  {
+    "code": "5H",
+
+    "suit": "HEARTS",
+    "value": "5",
+    "cardValue": "5",
+    "images": {
+      "png": "./assets/img/vicecards/5H.png"
+    }
+  },
+  {
+    "code": "6H",
+
+    "suit": "HEARTS",
+    "value": "6",
+    "cardValue": "6",
+    "images": {
+      "png": "./assets/img/vicecards/6H.png"
+    }
+  },
+  {
+    "code": "7H",
+
+    "suit": "HEARTS",
+    "value": "7",
+    "cardValue": "7",
+    "images": {
+      "png": "./assets/img/vicecards/7H.png"
+    }
+  },
+  {
+    "code": "8H",
+
+    "suit": "HEARTS",
+    "value": "8",
+    "cardValue": "8",
+    "images": {
+      "png": "./assets/img/vicecards/8H.png"
+    }
+  },
+  {
+    "code": "9H",
+
+    "suit": "HEARTS",
+    "value": "9",
+    "cardValue": "9",
+    "images": {
+      "png": "./assets/img/vicecards/9H.png"
+    }
+  },
+  {
+    "code": "0H",
+
+    "suit": "HEARTS",
+    "value": "10",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/10H.png"
+    }
+  },
+  {
+    "code": "JH",
+
+    "suit": "HEARTS",
+    "value": "JACK",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/JH.png"
+    }
+  },
+  {
+    "code": "QH",
+
+    "suit": "HEARTS",
+    "cardValue": "10",
+    "value": "QUEEN",
+    "images": {
+      "png": "./assets/img/vicecards/QH.png"
+    }
+  },
+  {
+    "code": "KH",
+
+    "suit": "HEARTS",
+    "value": "KING",
+    "cardValue": "10",
+    "images": {
+      "png": "./assets/img/vicecards/KH.png"
+    }
+  }
+]
