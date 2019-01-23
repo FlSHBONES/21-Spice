@@ -1,12 +1,14 @@
 import React from "react";
-import "./NameForm.css";
 
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function NameForm(props) {
   return (
-    <form className="search">
-      <div className="form-group col-10">
-        <label htmlFor="search">Player:</label>
+    <form className="welcome">
+      <h1>WELCOME TO 21 VICE</h1>
+      <h2>To Get Started, Initialize a table by typing "/table"</h2>
+      <h2>Once a table is initiated, join the table by entering your name from a different device!</h2>
+      <div className="form-group">
+        <label htmlFor="welcome">Player:</label>
         <input
           value={props.playerName}
           onChange={props.handleInputChange}
@@ -16,10 +18,10 @@ function NameForm(props) {
           placeholder="Enter Your Name"
           id="nameForm"
         />
-        <button type="submit" onClick={props.joinBTN} className="btn btn-success nameBTN">
+      </div>
+      <button type="submit" onClick={props.joinBTN} className="btn btn-success nameBTN">
           Join
         </button>
-      </div>
     </form>
   );
 }

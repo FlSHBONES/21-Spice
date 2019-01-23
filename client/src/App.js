@@ -4,6 +4,8 @@ import NameForm from './components/NameForm';
 // import { set } from 'mongoose';
 import "./App.css";
 import Table from './components/table';
+import TitleBar from './components/titlebar';
+import SideBar from './components/sidebar';
 import PlayerScreen from './components/playerScreen';
 
 
@@ -12,6 +14,7 @@ class App extends Component {
   state = {
     playerID: "",
     playerName: "",
+    playerNumber: "",
     displayPlayerName: "",
     numberOfPlayers: 0,
     dealerTotal: 0,
@@ -531,55 +534,60 @@ class App extends Component {
 
     return (
       <div className="App">
-        {/* This should be in the homepage/landing page as a modal */}
-        <div className='login'>
-          <NameForm
-            value={this.state.playerName}
-            handleInputChange={this.handleInputChange}
-            joinBTN={this.joinBTN}
-          />
-
-          <div>
-            Welcome: {this.state.displayPlayerName}
-          </div>
-
-          <div>
-            Number of Players: {this.state.numberOfPlayers}
-          </div>
-        </div>
-
+        <TitleBar />
         {/* Ternary operator to show either hand or table */}
         {this.state.tableStatus ?
-          <Table
-            playersInGame={this.state.playersInGame}
-
-            dealerTotal={this.state.dealerTotal}
-            dealerTotalAlt={this.state.dealerTotalAlt}
-            dealerCards={this.state.dealerCards}
-            gameMsg={this.state.gameMsg}
-          />
+          <div>
+            <SideBar
+              playerData={this.state.playersInGame}
+              numPlayers={this.state.numberOfPlayers}
+            />
+            <div className="game-area">
+              <Table
+                playersInGame={this.state.playersInGame}
+                numPlayers={this.state.playersInGame.length}
+                dealerTotal={this.state.dealerTotal}
+                dealerTotalAlt={this.state.dealerTotalAlt}
+                dealerCards={this.state.dealerCards}
+                // playerTotal={this.state.playerTotal}
+                // playerTotalAlt={this.state.playerTotalAlt}
+                // playerCards={this.state.playerCards}
+                gameMsg={this.state.gameMsg}
+                resetGame={this.resetGame}
+              />
+            </div>
+          </div>
           :
-          <PlayerScreen
-            // For Game Message
-            gameMsg={this.state.gameMsg}
+          <div className="height-100">
+            {/* Ternary operator to show either hand or table */}
+            {this.state.displayPlayerName.length>0?
+            <div className="height-100">
+              <PlayerScreen
+                // playersInGame={this.state.playersInGame}
+                socketId={this.state.playerID}
 
-            //For Cardlist
-            playerName={this.state.playerName}
-            playerTotal={this.state.playerTotal}
-            playerTotalAlt={this.state.playerTotalAlt}
-            playerCards={this.state.playerCards}
+                // For Game Message
+                gameMsg={this.state.gameMsg}
+                resetGame={this.resetGame}
 
-            //For Controls
-            bet={this.state.bet}
-            chips={this.state.chips}
-            isPlaying={this.state.isPlaying}
-            makeBet={this.makeBet}
-            readyClicked={this.readyClicked}
-            hitClicked={this.hitClicked}
-            stayClicked={this.stayClicked}
-            clearBet={this.clearBet}
-            playerID={this.state.playerID}
+                //For Cardlist
+                playerName={this.state.playerName}
+                playerTotal={this.state.playerTotal}
+                playerTotalAlt={this.state.playerTotalAlt}
+                playerCards={this.state.playerCards}
 
+                //For Controls
+                bet={this.state.bet}
+                chips={this.state.chips}
+                isPlaying={this.state.isPlaying}
+                makeBet={this.makeBet}
+                readyClicked={this.readyClicked}
+                hitClicked={this.hitClicked}
+                stayClicked={this.stayClicked}
+                clearBet={this.clearBet}
+                playerID={this.state.playerID}
+
+                
             //For MiniGame
             miniGame={this.state.miniGame}
             options={options}
@@ -588,9 +596,28 @@ class App extends Component {
             //For Powers
             powers={this.state.powers}
             usePower={this.usePower}
-          />
-        }
+              />
+            </div>
+            :
+            <div>
+              <div className='login'>
+                <NameForm
+                  value={this.state.playerName}
+                  handleInputChange={this.handleInputChange}
+                  joinBTN={this.joinBTN}
+                />
+                <div>
+                  Welcome: {this.state.displayPlayerName}
+                </div>
+                <div>
+                  Number of Players: {this.state.numberOfPlayers}
+                </div>
+              </div>
+            </div>
+            }
 
+          </div>
+        }
       </div>
     );
   }

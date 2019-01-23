@@ -45,16 +45,20 @@ button.btn {
   background: green;
   color: white;
   font-size: 20px;
+  margin-right: 10px;
+  left: 0;
+  margin-top: 20px;
 }
 
 button.btnDisabled {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   border-color: darkgreen;
   border-radius: 10px;
   background: lightgreen;
   color: darkgrey;
   font-size: 20px;
+  margin-right: 10px;
 }
 
 button.btn:hover {
@@ -73,22 +77,22 @@ button.btn:hover {
 }
 
 button.bet {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   background: lightgray;
   color: black;
   font-size: 20px;
   font-weight: bolder;
   border-radius: 50px;
-  border: 8.5px dashed rgb(37, 18, 18);
+  border: 4px dashed rgb(37, 18, 18);
   margin: 4px;
 }
 
 button.bet:hover {
   border-color: gray;
   color: white;
-  width: 110px;
-  height: 110px;
+  width: 70px;
+  height: 70px;
 }
 
 button.bet2_5 {
@@ -107,14 +111,14 @@ button.bet25 {
   background-color: goldenrod;
 }
 button.betDisabled {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   background: lightgray;
   color: black;
   font-size: 20px;
   font-weight: bolder;
   border-radius: 50px;
-  border: 8px dashed gray;
+  border: 4px dashed gray;
   margin: 4px;
   color: gray;
 }
@@ -125,7 +129,7 @@ button.betDisabled {
 
 .numDisplay {
   background: rgb(57, 63, 136);
-  padding: 10px 60px;
+  padding: 5px 60px;
   border-radius: 10px;
   border-color: whitesmoke;
   opacity: 0.95;
@@ -133,11 +137,167 @@ button.betDisabled {
 
 .totalDisplay {
   background: rgb(57, 63, 136);
-  padding: 20px 280px;
-  border-radius: 25px;
+  padding: 5px 100px;
+  border-radius: 10px;
   opacity: 0.95;
 }
 
 .login {
   background-color: teal;
 }
+
+/* PAGE SHELL CSS */
+
+#main-app {
+  height: 500px;
+}
+
+#root {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0
+}
+
+.app {
+  position: absolute;
+}
+
+.game-area {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  left: 200px;
+  top: 75px;
+  bottom: 0;
+  right: 0
+}
+
+.title-bar {
+  height: 75px;
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+}
+
+#bjack-logo {
+  width: 125px;
+}
+
+#bjack-title {
+  height: 100%;
+  margin-left: 30px;
+}
+
+#sidebar-wrapper {
+  position: fixed;
+  top: 75px;
+  bottom: 0px;
+  width: 200px;
+}
+
+#mySidebar {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.player-box1 {
+  height: 100%;
+  color: white;
+  text-align: center;
+  padding: 0 !important;
+}
+
+.player-box2 {
+  height: 50%;
+  color: white;
+  text-align: center;
+  padding: 0 !important;
+}
+
+.player-box3 {
+  height: 33.3%;
+  color: white;
+  text-align: center;
+  padding: 0 !important;
+}
+
+.player-box4 {
+  height: 25%;
+  color: white;
+  text-align: center;
+  padding: 0 !important;
+}
+
+.character-icon {
+  width: 100%;
+  padding-left: 10px;
+}
+
+.character-box {
+  width: 50%;
+  float: left;
+}
+
+.player-name {
+  text-align: center;
+  font-size: 16px;
+  width: 50%;
+  float: left;
+}
+
+.player-score {
+  font-size: 12px;
+}
+
+.player0 {
+  background-color: #373b84;
+}
+
+.player1 {
+  background-color: #1593ac;
+}
+
+.player2 {
+
+  background-color: #df773e;
+}
+
+.player3 {
+  background-color: #e21887;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  margin: 40px;
+}
+
+.welcome {
+  margin-top: 200px;
+  height: 100%;
+  text-align: center;
+}
+
+.form-group {
+  overflow: auto;
+}
+
+.playerScreen {
+  height: 100%;
+}
+
+.height-100 {
+  height: 100%;
+}
+
+.App {
+  height: 100%;
+}
+
+#root {
+  height: 100%
+}
+
+html, body {margin:0;padding:0;height:100% !important;}

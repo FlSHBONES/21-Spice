@@ -173,7 +173,7 @@ io.on('connection', socket => {
     }
     else {
 
-      player = new Player(socket.id, data.playerName);
+      player = new Player(socket.id, data.playerName, players.length);
 
       players.push(player);
 
