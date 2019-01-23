@@ -7,7 +7,8 @@ import Table from './components/table';
 import TitleBar from './components/titlebar';
 import SideBar from './components/sidebar';
 import PlayerScreen from './components/playerScreen';
-
+import TitleScreen from './components/titlescreen';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class App extends Component {
 
@@ -33,6 +34,8 @@ class App extends Component {
     powers: [],
     powerUsed: [],
     playersInGame: [],
+    modal: false,
+    showTitle: true
   }
 
   componentDidMount() {
@@ -209,26 +212,6 @@ class App extends Component {
           })
         }
       }
-
-      // for (var i = 0; i < data.length; i++) {
-      //   if (data[i].socketId === this.state.playerID) {
-      //     this.setState({
-      //       dealerCards: [],
-      //       dealerTotal: 0,
-      //       dealerTotalAlt: 0,
-      //       gameMsg: '',
-      //       isPlaying: false,
-      //       playerTotal: 0,
-      //       playerTotalAlt: 0,
-      //       playerCards: [],
-      //       bet: 0,
-      //       chips: data[i].chips,
-      //       playersInGame: data
-      //     })
-      //   }
-      // }
-
-
     })
 
     // Display next round for table
@@ -297,6 +280,8 @@ class App extends Component {
         powers: [],
         powerUsed: [],
         playersInGame: [],
+        modal: false,
+        showTitle: true
       })
     })
 
@@ -325,6 +310,8 @@ class App extends Component {
         powers: [],
         powerUsed: [],
         playersInGame: [],
+        modal: false,
+        showTitle: true
       })
     })
 
@@ -354,61 +341,65 @@ class App extends Component {
 
     })
 
-        // TACTICAL NUKE INCOMING!
-        this.socket.on('TACTICAL NUKE INCOMING!', data => {
-          console.log(data)
-          this.setState({
-            playerID: "",
-            playerName: "",
-            playerNumber: "",
-            displayPlayerName: "",
-            numberOfPlayers: 0,
-            dealerTotal: 0,
-            dealerTotalAlt: 0,
-            dealerCards: [],
-            playerTotal: 0,
-            playerTotalAlt: 0,
-            playerCards: [],
-            bet: 0,
-            chips: 1000,
-            isPlaying: false,
-            gameMsg: null,
-            tableStatus: false,
-            miniGame: false,
-            powerStatus: false,
-            powers: [],
-            powerUsed: [],
-            playersInGame: [],
-          })
-        })
-    
-        // TACTICAL NUKE INCOMING!! (table)
-        this.socket.on('TACTICAL NUKE INCOMING!!', data => {
-          console.log(data)
-          this.setState({
-            playerID: "",
-            playerName: "",
-            playerNumber: "",
-            displayPlayerName: "",
-            numberOfPlayers: 0,
-            dealerTotal: 0,
-            dealerTotalAlt: 0,
-            dealerCards: [],
-            playerTotal: 0,
-            playerTotalAlt: 0,
-            playerCards: [],
-            bet: 0,
-            chips: 1000,
-            isPlaying: false,
-            gameMsg: null,
-            tableStatus: false,
-            miniGame: false,
-            powerStatus: false,
-            powers: [],
-            powerUsed: [],
-            playersInGame: [],
-          })
-        })
+    // TACTICAL NUKE INCOMING!
+    this.socket.on('TACTICAL NUKE INCOMING!', data => {
+      console.log(data)
+      this.setState({
+        playerID: "",
+        playerName: "",
+        playerNumber: "",
+        displayPlayerName: "",
+        numberOfPlayers: 0,
+        dealerTotal: 0,
+        dealerTotalAlt: 0,
+        dealerCards: [],
+        playerTotal: 0,
+        playerTotalAlt: 0,
+        playerCards: [],
+        bet: 0,
+        chips: 1000,
+        isPlaying: false,
+        gameMsg: null,
+        tableStatus: false,
+        miniGame: false,
+        powerStatus: false,
+        powers: [],
+        powerUsed: [],
+        playersInGame: [],
+        modal: false,
+        showTitle: true
+      })
+    })
+
+    // TACTICAL NUKE INCOMING!! (table)
+    this.socket.on('TACTICAL NUKE INCOMING!!', data => {
+      console.log(data)
+      this.setState({
+        playerID: "",
+        playerName: "",
+        playerNumber: "",
+        displayPlayerName: "",
+        numberOfPlayers: 0,
+        dealerTotal: 0,
+        dealerTotalAlt: 0,
+        dealerCards: [],
+        playerTotal: 0,
+        playerTotalAlt: 0,
+        playerCards: [],
+        bet: 0,
+        chips: 1000,
+        isPlaying: false,
+        gameMsg: null,
+        tableStatus: false,
+        miniGame: false,
+        powerStatus: false,
+        powers: [],
+        powerUsed: [],
+        playersInGame: [],
+        modal: false,
+        showTitle: true
+      })
+    })
 
 
   }
@@ -464,11 +455,13 @@ class App extends Component {
       if (player.playerName === '/table') {
         this.setState({
           tableStatus: true,
+          showTitle: false
         })
       }
       else {
         this.setState({
-          displayPlayerName: player.playerName
+          displayPlayerName: player.playerName,
+          showTitle: false
         })
       }
     })
@@ -598,6 +591,13 @@ class App extends Component {
     this.socket.emit('Nuke', '25 KILL STREAK!!!');
   }
 
+  toggle = () => {
+    console.log('Toggle was clicked');
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+
 
   render() {
 
@@ -611,32 +611,46 @@ class App extends Component {
 
     return (
       <div className="App">
-        {/* Ternary operator to show either hand or table */}
-        {this.state.tableStatus ?
+        {this.state.showTitle ?
           <div>
-            <TitleBar 
-            nuke={this.nuke}
+            <TitleScreen
+              toggle={this.toggle}
+              modal={this.state.modal}
             />
-            <SideBar
-              playerData={this.state.playersInGame}
-              numPlayers={this.state.numberOfPlayers}
-            />
-            <div className="game-area">
-              <Table
-                playersInGame={this.state.playersInGame}
-                numPlayers={this.state.playersInGame.length}
-                dealerTotal={this.state.dealerTotal}
-                dealerTotalAlt={this.state.dealerTotalAlt}
-                dealerCards={this.state.dealerCards}
-                gameMsg={this.state.gameMsg}
-              />
-            </div>
+
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className='modal box'>
+              <ModalHeader toggle={this.toggle}></ModalHeader>
+              <ModalBody>
+                <NameForm
+                  value={this.state.playerName}
+                  handleInputChange={this.handleInputChange}
+                  joinBTN={this.joinBTN}
+                  toggle={this.toggle}
+                />
+              </ModalBody>
+            </Modal>
           </div>
           :
-          <div className="height-100">
-            {/* Ternary operator to show either player screen or login*/}
-            {this.state.displayPlayerName ?
-            <div className="height-100">
+          <div>
+            {this.state.tableStatus ?
+              <div>
+                <TitleBar />
+                <SideBar
+                  playerData={this.state.playersInGame}
+                  numPlayers={this.state.numberOfPlayers}
+                />
+                <div className="game-area">
+                  <Table
+                    playersInGame={this.state.playersInGame}
+                    numPlayers={this.state.playersInGame.length}
+                    dealerTotal={this.state.dealerTotal}
+                    dealerTotalAlt={this.state.dealerTotalAlt}
+                    dealerCards={this.state.dealerCards}
+                    gameMsg={this.state.gameMsg}
+                  />
+                </div>
+              </div>
+              :
               <PlayerScreen
                 // playersInGame={this.state.playersInGame}
                 socketId={this.state.playerID}
@@ -661,30 +675,16 @@ class App extends Component {
                 clearBet={this.clearBet}
                 playerID={this.state.playerID}
 
-                
-            //For MiniGame
-            miniGame={this.state.miniGame}
-            options={options}
-            handleOnComplete={this.handleOnComplete}
 
-            //For Powers
-            powers={this.state.powers}
-            usePower={this.usePower}
+                //For MiniGame
+                miniGame={this.state.miniGame}
+                options={options}
+                handleOnComplete={this.handleOnComplete}
+
+                //For Powers
+                powers={this.state.powers}
+                usePower={this.usePower}
               />
-            </div>
-            :
-            <div>
-              <video autoPlay muted loop id="myVideo">
-                <source src="./assets/vid/21_VICE_INTRO.mp4" type="video/mp4" />
-              </video>
-              <div className='login'>
-                <NameForm
-                  value={this.state.playerName}
-                  handleInputChange={this.handleInputChange}
-                  joinBTN={this.joinBTN}
-                />
-              </div>
-            </div>
             }
           </div>
         }

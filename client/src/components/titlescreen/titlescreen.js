@@ -9,15 +9,14 @@ const Titlescreen = props => {
         Your browser does not support the video tag.
       </video>
 
-      <div class="box-wrapper loading">
-        <div class="box">
-          <div class="content">
-            <h1 />
-            <p>
-              <img src="./assets/img/logo.png" alt="21Vice" id="logo" />
-            </p>
+      <div className="box-wrapper loading">
+        <div className="box">
+          <div className="content">
 
-            <button id="myBtn" onclick="myFunction()">
+              <img src="./assets/img/21_vice_logo.png" alt="21Vice" id="logo" />
+
+
+            <button id="myBtn" onClick={props.toggle}>
               <strong>Let's Play</strong>
             </button>
           </div>

@@ -5,7 +5,6 @@ function NameForm(props) {
   return (
     <form className="welcome">
       <h1>WELCOME TO</h1>
-      <img id="viceCard" src="./assets/img/vicecards/back.png"/>
       <h2>Type "/table" to start a game</h2>
       <h2>Once a table is initiated, enter your name from a different device to join!</h2>
       <div className="form-group">
@@ -21,7 +20,10 @@ function NameForm(props) {
         />
       </div>
       <button type="submit" onClick={props.joinBTN} className="btn nameBTN">
-          Join
+        Join
+        </button>
+      <button onClick='' className="btn nameBTN">
+        Leader Board
         </button>
     </form>
   );
