@@ -1,7 +1,8 @@
 class Player {
-    constructor(socketId, playerName) {
+    constructor(socketId, playerName, playerNumber) {
         this.socketId = socketId;
         this.playerName = playerName;
+        this.playerNum = playerNumber;        
         this.hand = [];
         this.playerTotal = 0;
         this.playerTotalAlt = 0;
@@ -9,6 +10,8 @@ class Player {
         this.bet = 0;
         this.chips = 100;
         this.powers = [];
+        this.powerStatus = false;
+        this.powerUsed = 0;
     }
 }
 

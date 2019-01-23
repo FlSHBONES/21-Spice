@@ -10,8 +10,6 @@ function PlayerScreen(props) {
 
     return (
         <div className="container playerScreen">
-            <h1>THIS IS THE PLAYERS SCREEN!!!!!!!!!!!!!</h1>
-
             {props.gameMsg ? (
                 <GameMessage msg={props.gameMsg} miniGame={props.miniGame} options={props.options} handleOnComplete={props.handleOnComplete}/>
             ) : (

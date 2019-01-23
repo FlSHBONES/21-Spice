@@ -173,7 +173,7 @@ io.on('connection', socket => {
     }
     else {
 
-      player = new Player(socket.id, data.playerName);
+      player = new Player(socket.id, data.playerName, players.length);
 
       players.push(player);
 
@@ -239,8 +239,19 @@ io.on('connection', socket => {
   socket.on('Calc', data => { // both Aces doesnt work
     dealerTotal = calcCardTotal(dealerCards, false);
     dealerTotalAlt = calcCardTotal(dealerCards, true);
+
     let newPlayerTotal = calcCardTotal(data.playerCards, false);
     let newPlayerTotalAlt = calcCardTotal(data.playerCards, true);
+
+    // Player total needs to be in here
+    for (var i = 0; i < players.length; i++) {
+      if (players[i].socketId === data.playerID) {
+        if (players[i].powerStatus) {
+          newPlayerTotal = (calcCardTotal(data.playerCards, false) + players[i].powerUsed);
+          newPlayerTotalAlt = (calcCardTotal(data.playerCards, true) + players[i].powerUsed);
+        }
+      }
+    }
 
     for (var i = 0; i < players.length; i++) {
       if (players[i].socketId === data.playerID) {
@@ -363,24 +374,28 @@ io.on('connection', socket => {
         if (Math.min(dealerTotal, dealerTotalAlt) > 21 && newPlayerTotal <= 21) {
           players[i].gameMsg = 'You Win!!!';
           players[i].chips = players[i].chips + (players[i].bet * 2);
+          players[i].powerStatus = false;
         } else if (
           (dealerTotal <= 21 && dealerTotal === newPlayerTotal) ||
           (dealerTotalAlt <= 21 && dealerTotalAlt === newPlayerTotal)
         ) {
           players[i].gameMsg = 'Tie';
           players[i].chips = players[i].chips + players[i].bet;
+          players[i].powerStatus = false;
         } else if (
           (dealerTotal <= 21 && dealerTotal > newPlayerTotal) ||
           (dealerTotalAlt <= 21 && dealerTotalAlt > newPlayerTotal)
         ) {
           players[i].gameMsg = 'Dealer wins!!!';
           players[i].chips = players[i].chips - players[i].bet;
+          players[i].powerStatus = false;
         } else if (
           (dealerTotal <= 21 && dealerTotal < newPlayerTotal) &&
           (dealerTotalAlt <= 21 && dealerTotalAlt < newPlayerTotal) && (newPlayerTotal <= 21)
         ) {
           players[i].gameMsg = 'You Win!!!';
           players[i].chips = players[i].chips + (players[i].bet * 2);
+          players[i].powerStatus = false;
         }
 
       }
@@ -552,6 +567,8 @@ io.on('connection', socket => {
         players[i].powers = data.powers;
         players[i].playerTotal = players[i].playerTotal + value;
         players[i].playerTotalAlt = players[i].playerTotalAlt + value;
+        players[i].powerStatus = true;
+        players[i].powerUsed = value;
       }
     }
 
@@ -559,6 +576,8 @@ io.on('connection', socket => {
     console.log(players)
 
     socket.emit('Player used power', players)
+
+    // Do i need it to emit to table???
   })
 
   socket.on('disconnect', function () {

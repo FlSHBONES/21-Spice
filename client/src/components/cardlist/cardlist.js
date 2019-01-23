@@ -8,7 +8,7 @@ const CardList = props => {
   };
 
   return (
-    <div style={{ height: 275  }} className='col'>
+    <div className='col'>
       <div className="mid">
         <span className="numDisplay">
           {props.cardDisplay +
