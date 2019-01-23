@@ -1,7 +1,8 @@
 import React from "react";
 import CardList from "../cardlist";
+import DealerSpace from "../dealerspace";
 import GameMessage from "../gamemessage";
-import "./table.css";
+import PlayerSpace from "../playerspace";
 
 // Using the datalist element we can create autofill suggestions based on the props.breeds array
 function Table(props) {
@@ -12,40 +13,39 @@ function Table(props) {
       </video> */}
 
       {props.numPlayers > 0 ? (
-        <div>
-          <div className="table-with-players">
-            <CardList
-              cardDisplay="Dealer: "
-              cardTotal={props.dealerTotal}
-              cardTotalAlt={props.dealerTotalAlt}
-              cards={props.dealerCards}
-            />
-            <div className="row">
-              {props.playersInGame.map(player => (
-                <div>
-                  <h4>{player.gameMsg}</h4>
+        <div className="table-with-players">
+          <DealerSpace
+            cardDisplay="Dealer: "
+            cardTotal={props.dealerTotal}
+            cardTotalAlt={props.dealerTotalAlt}
+            cards={props.dealerCards}
+          />
+          <div className="playerSpace">
+            {props.playersInGame.map((player, index) => (
+              <div className={`playerSpace-${index}`}>
+                <h4>{player.gameMsg}</h4>
 
-                  <CardList
-                    cardDisplay={`${player.playerName}:`}
-                    cardTotal={player.playerTotal}
-                    cardTotalAlt={player.playerTotalAlt}
-                    cards={player.hand}
-                  />
-                </div>
-              ))}
-            </div>
-            {props.gameMsg ? (
-              <GameMessage msg={props.gameMsg} resetClicked={props.resetGame} />
-            ) : (
+                <PlayerSpace
+                  cardDisplay={`${player.playerName}:`}
+                  cardTotal={player.playerTotal}
+                  cardTotalAlt={player.playerTotalAlt}
+                  cards={player.hand}
+                  playerIndex={index}
+                />
+              </div>
+            ))}
+          </div>
+          {props.gameMsg ? (
+            <GameMessage msg={props.gameMsg} resetClicked={props.resetGame} />
+          ) : (
               false
             )}
-          </div>
         </div>
       ) : (
-        <div className="empty-table">
-          <h1>ADD PLAYERS TO BEGIN GAME</h1>
+          <div className="empty-table">
+            ADD PLAYERS TO BEGIN GAME
         </div>
-      )}
+        )}
     </div>
   );
 }

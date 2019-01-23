@@ -145,6 +145,7 @@ button.betDisabled {
   background-color: black;
   border-style: solid;
   margin: 150px;
+  border-color: lavender;
 }
 
 /* PAGE SHELL CSS */
@@ -166,12 +167,11 @@ button.betDisabled {
 
 .game-area {
   position: absolute;
-  width: 100%;
   text-align: center;
   left: 200px;
   top: 75px;
   bottom: 0;
-  right: 0
+  right: 0;
 }
 
 .title-bar {
@@ -195,6 +195,7 @@ button.betDisabled {
   top: 75px;
   bottom: 0px;
   width: 200px;
+  background-color: #1593ac;
 }
 
 #mySidebar {
@@ -289,6 +290,7 @@ button.betDisabled {
 
 .height-100 {
   height: 100%;
+  width: 100%;
 }
 
 #viceCard {
@@ -297,6 +299,7 @@ button.betDisabled {
 
 .App {
   height: 100%;
+  width: 100%;
 }
 
 #root {
@@ -317,4 +320,114 @@ html, body {margin:0;padding:0;height:100% !important;}
 .nameBTN {
   margin: 20px;
   background: #1593ac
+}
+
+.table {
+  height: 100%;
+  width: 100%;
+}
+
+.table-with-players {
+  height: 100%;
+  width: 100%;
+}
+
+.dealerSpace {
+  height: 40%;
+}
+
+.dealersCards {
+  height: 100%;
+}
+
+.playerSpace {
+  height: 100%;
+  width: 100%;
+}
+
+.playerSpace-0 {
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+.playerSpace-1 {
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+.playerSpace-2 {
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+.playerSpace-3 {
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+.playerSpace-0-Sub {
+  height: 100%;
+}
+
+.playerSpace-1-Sub {
+  height: 100%;
+}
+
+.playerSpace-2-Sub {
+  height: 100%;
+}
+
+.playerSpace-3-Sub {
+  height: 100%;
+}
+
+.playersCards {
+  position: relative;
+  height: 100%;
+}
+
+.Card-Num-0 {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.Card-Num-1 {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.Card-Num-2 {
+  position: absolute;
+  top: 70px;
+  left: 70px;
+}
+
+.Card-Num-3 {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
+
+.Card-Num-4 {
+  position: absolute;
+  top: 130px;
+  left: 130px;
+}
+
+.Card-Num-5 {
+  position: absolute;
+  top: 160px;
+  left: 160px;
+}
+
+.Card-Num-6 {
+  position: absolute;
+  top: 190px;
+  left: 190px;
 }
