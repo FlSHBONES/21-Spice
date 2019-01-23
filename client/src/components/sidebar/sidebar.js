@@ -9,7 +9,7 @@ const SideBar = props => {
                     <PlayerCard
                         playerNum={player.playerNum}
                         playerName={player.playerName}
-                        playerTotal={player.playerTotal}
+                        chips={player.chips}
                         numPlayers={props.playerData.length}
                     />
                 ))}

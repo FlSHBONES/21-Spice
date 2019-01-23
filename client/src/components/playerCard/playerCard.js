@@ -11,7 +11,7 @@ const PlayerCard = props => {
             </div>
             <div className="player-name">
                 <p>{props.playerName}</p>
-                <div className="player-score">{props.playerTotal}{props.player}</div>
+                <div className="player-score">{props.chips}</div>
             </div>
         </button>
     );

@@ -539,10 +539,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <TitleBar />
         {/* Ternary operator to show either hand or table */}
         {this.state.tableStatus ?
           <div>
+            <TitleBar />
             <SideBar
               playerData={this.state.playersInGame}
               numPlayers={this.state.numberOfPlayers}
@@ -560,8 +560,8 @@ class App extends Component {
           </div>
           :
           <div className="height-100">
-            {/* Ternary operator to show either hand or table */}
-            {this.state.displayPlayerName.length>0?
+            {/* Ternary operator to show either player screen or login*/}
+            {this.state.displayPlayerName ?
             <div className="height-100">
               <PlayerScreen
                 // playersInGame={this.state.playersInGame}
@@ -600,22 +600,18 @@ class App extends Component {
             </div>
             :
             <div>
+              <video autoPlay muted loop id="myVideo">
+                <source src="./assets/vid/21_VICE_INTRO.mp4" type="video/mp4" />
+              </video>
               <div className='login'>
                 <NameForm
                   value={this.state.playerName}
                   handleInputChange={this.handleInputChange}
                   joinBTN={this.joinBTN}
                 />
-                <div>
-                  Welcome: {this.state.displayPlayerName}
-                </div>
-                <div>
-                  Number of Players: {this.state.numberOfPlayers}
-                </div>
               </div>
             </div>
             }
-
           </div>
         }
       </div>
