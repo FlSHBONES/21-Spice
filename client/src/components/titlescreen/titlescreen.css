@@ -43,4 +43,6 @@
   height: 75%;
   width: 80%;
   padding-left: 10%;
+  position: relative;
+  top: 170px;
 }

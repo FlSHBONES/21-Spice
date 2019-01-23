@@ -278,6 +278,7 @@ button.betDisabled {
 
 .welcome {
   text-align: center;
+  background-color: #373b84a4;
 }
 
 .form-group {
@@ -321,6 +322,31 @@ html, body {margin:0;padding:0;height:100% !important;}
   margin: 20px;
   background: #1593ac
 }
+
+
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.527);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+  height: 100%;
+}
+
+.close {
+  position: absolute;
+  right: 2%;
+  background-color: #373b8400;
+  color: white;
+  border: none;
+
+}
+
+
+
+
+
 
 .table {
   height: 100%;
@@ -429,5 +455,4 @@ html, body {margin:0;padding:0;height:100% !important;}
 .Card-Num-6 {
   position: absolute;
   top: 190px;
-  left: 190px;
-}
+  left: 190px;}
