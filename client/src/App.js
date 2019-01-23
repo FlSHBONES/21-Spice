@@ -24,14 +24,14 @@ class App extends Component {
     playerTotalAlt: 0,
     playerCards: [],
     bet: 0,
-    chips: 100,
+    chips: 1000,
     isPlaying: false,
     gameMsg: null,
     tableStatus: false,
     miniGame: false,
     powerStatus: false,
     powers: [],
-    powerUsed: 0,
+    powerUsed: [],
     playersInGame: [],
   }
 
@@ -278,6 +278,7 @@ class App extends Component {
       this.setState({
         playerID: "",
         playerName: "",
+        playerNumber: "",
         displayPlayerName: "",
         numberOfPlayers: 0,
         dealerTotal: 0,
@@ -287,10 +288,14 @@ class App extends Component {
         playerTotalAlt: 0,
         playerCards: [],
         bet: 0,
-        chips: 100,
+        chips: 1000,
         isPlaying: false,
         gameMsg: null,
         tableStatus: false,
+        miniGame: false,
+        powerStatus: false,
+        powers: [],
+        powerUsed: [],
         playersInGame: [],
       })
     })
@@ -301,6 +306,7 @@ class App extends Component {
       this.setState({
         playerID: "",
         playerName: "",
+        playerNumber: "",
         displayPlayerName: "",
         numberOfPlayers: 0,
         dealerTotal: 0,
@@ -310,10 +316,14 @@ class App extends Component {
         playerTotalAlt: 0,
         playerCards: [],
         bet: 0,
-        chips: 100,
+        chips: 1000,
         isPlaying: false,
         gameMsg: null,
         tableStatus: false,
+        miniGame: false,
+        powerStatus: false,
+        powers: [],
+        powerUsed: [],
         playersInGame: [],
       })
     })
@@ -343,6 +353,62 @@ class App extends Component {
       }
 
     })
+
+        // TACTICAL NUKE INCOMING!
+        this.socket.on('TACTICAL NUKE INCOMING!', data => {
+          console.log(data)
+          this.setState({
+            playerID: "",
+            playerName: "",
+            playerNumber: "",
+            displayPlayerName: "",
+            numberOfPlayers: 0,
+            dealerTotal: 0,
+            dealerTotalAlt: 0,
+            dealerCards: [],
+            playerTotal: 0,
+            playerTotalAlt: 0,
+            playerCards: [],
+            bet: 0,
+            chips: 1000,
+            isPlaying: false,
+            gameMsg: null,
+            tableStatus: false,
+            miniGame: false,
+            powerStatus: false,
+            powers: [],
+            powerUsed: [],
+            playersInGame: [],
+          })
+        })
+    
+        // TACTICAL NUKE INCOMING!! (table)
+        this.socket.on('TACTICAL NUKE INCOMING!!', data => {
+          console.log(data)
+          this.setState({
+            playerID: "",
+            playerName: "",
+            playerNumber: "",
+            displayPlayerName: "",
+            numberOfPlayers: 0,
+            dealerTotal: 0,
+            dealerTotalAlt: 0,
+            dealerCards: [],
+            playerTotal: 0,
+            playerTotalAlt: 0,
+            playerCards: [],
+            bet: 0,
+            chips: 1000,
+            isPlaying: false,
+            gameMsg: null,
+            tableStatus: false,
+            miniGame: false,
+            powerStatus: false,
+            powers: [],
+            powerUsed: [],
+            playersInGame: [],
+          })
+        })
 
 
   }
@@ -527,6 +593,12 @@ class App extends Component {
     })
   }
 
+  nuke = () => {
+    console.log('25 KILL STREAK UNLOCKED!!!')
+    this.socket.emit('Nuke', '25 KILL STREAK!!!');
+  }
+
+
   render() {
 
     const options = [
@@ -542,7 +614,9 @@ class App extends Component {
         {/* Ternary operator to show either hand or table */}
         {this.state.tableStatus ?
           <div>
-            <TitleBar />
+            <TitleBar 
+            nuke={this.nuke}
+            />
             <SideBar
               playerData={this.state.playersInGame}
               numPlayers={this.state.numberOfPlayers}

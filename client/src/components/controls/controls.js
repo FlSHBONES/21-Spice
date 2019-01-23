@@ -28,33 +28,33 @@ const Controls = props => {
             1
           </button>
           <button
-            onClick={() => props.makeBet(2.5)}
-            className={"bet" + isDisabled() + " bet2_5"}
-            disabled={props.isPlaying}
-          >
-            2.5
-          </button>
-          <button
-            onClick={() => props.makeBet(5)}
-            className={"bet" + isDisabled() + " bet5"}
-            disabled={props.isPlaying}
-          >
-            5
-          </button>
-          <button
-            onClick={() => props.makeBet(10)}
-            className={"bet" + isDisabled() + " bet10"}
-            disabled={props.isPlaying}
-          >
-            10
-          </button>
-
-          <button
             onClick={() => props.makeBet(25)}
             className={"bet" + isDisabled() + " bet25"}
             disabled={props.isPlaying}
           >
             25
+          </button>
+          <button
+            onClick={() => props.makeBet(50)}
+            className={"bet" + isDisabled() + " bet50"}
+            disabled={props.isPlaying}
+          >
+            50
+          </button>
+          <button
+            onClick={() => props.makeBet(100)}
+            className={"bet" + isDisabled() + " bet100"}
+            disabled={props.isPlaying}
+          >
+            100
+          </button>
+
+          <button
+            onClick={() => props.makeBet(150)}
+            className={"bet" + isDisabled() + " bet150"}
+            disabled={props.isPlaying}
+          >
+            150
           </button>
         </span>
         <span style={{ paddingLeft: 40 }}>

@@ -8,10 +8,10 @@ class Player {
         this.playerTotalAlt = 0;
         this.gameMsg = "";
         this.bet = 0;
-        this.chips = 100;
+        this.chips = 1000;
         this.powers = [];
         this.powerStatus = false;
-        this.powerUsed = 0;
+        this.powerUsed = [];
     }
 }
 
