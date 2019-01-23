@@ -42,7 +42,6 @@ button.btn {
   height: 100px;
   border-color: darkgreen;
   border-radius: 10px;
-  background: green;
   color: white;
   font-size: 20px;
   margin-right: 10px;
@@ -143,7 +142,9 @@ button.betDisabled {
 }
 
 .login {
-  background-color: teal;
+  background-color: black;
+  border-style: solid;
+  margin: 150px;
 }
 
 /* PAGE SHELL CSS */
@@ -275,8 +276,6 @@ button.betDisabled {
 }
 
 .welcome {
-  margin-top: 200px;
-  height: 100%;
   text-align: center;
 }
 
@@ -292,6 +291,10 @@ button.betDisabled {
   height: 100%;
 }
 
+#viceCard {
+  height: 250px;
+}
+
 .App {
   height: 100%;
 }
@@ -301,3 +304,17 @@ button.betDisabled {
 }
 
 html, body {margin:0;padding:0;height:100% !important;}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+  z-index: -9999999;
+}
+
+.nameBTN {
+  margin: 20px;
+  background: #1593ac
+}
