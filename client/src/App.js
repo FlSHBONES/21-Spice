@@ -9,7 +9,8 @@ import SideBar from "./components/sidebar";
 import PlayerScreen from "./components/playerScreen";
 import TitleScreen from "./components/titlescreen";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import Music from "./components/music";
+import Musictitle from "./components/musictitle";
+import MusicR1 from "./components/musicR1";
 
 class App extends Component {
   state = {
@@ -35,7 +36,8 @@ class App extends Component {
     powerUsed: [],
     playersInGame: [],
     modal: false,
-    showTitle: true
+    showTitle: true,
+    roundNumber: 0
   };
 
   componentDidMount() {
@@ -430,7 +432,7 @@ class App extends Component {
       this.socket.emit("MSG To Server", {
         message: `SocketID: ${
           dataFromServer.socketid
-          } has connected to server!`,
+        } has connected to server!`,
         socketid: dataFromServer.socketid
       });
 
@@ -671,7 +673,7 @@ class App extends Component {
         {this.state.showTitle ? (
           <div>
             <TitleScreen toggle={this.toggle} modal={this.state.modal} />
-            <Music />
+            <Musictitle />
             <Modal
               isOpen={this.state.modal}
               toggle={this.toggle}
@@ -690,57 +692,58 @@ class App extends Component {
             </Modal>
           </div>
         ) : (
-            <div>
-              {this.state.tableStatus ? (
-                <div>
-                  <TitleBar nuke={this.nuke} />
-                  <SideBar
-                    playerData={this.state.playersInGame}
-                    numPlayers={this.state.numberOfPlayers}
-                  />
-                  <div className="game-area">
-                    <Table
-                      playersInGame={this.state.playersInGame}
-                      numPlayers={this.state.playersInGame.length}
-                      dealerTotal={this.state.dealerTotal}
-                      dealerTotalAlt={this.state.dealerTotalAlt}
-                      dealerCards={this.state.dealerCards}
-                      gameMsg={this.state.gameMsg}
-                    />
-                  </div>
-                </div>
-              ) : (
-                  <PlayerScreen
-                    // playersInGame={this.state.playersInGame}
-                    socketId={this.state.playerID}
-                    // For Game Message
+          <div>
+            {this.state.tableStatus ? (
+              <div>
+                <TitleBar nuke={this.nuke} />
+                <MusicR1 />
+                <SideBar
+                  playerData={this.state.playersInGame}
+                  numPlayers={this.state.numberOfPlayers}
+                />
+                <div className="game-area">
+                  <Table
+                    playersInGame={this.state.playersInGame}
+                    numPlayers={this.state.playersInGame.length}
+                    dealerTotal={this.state.dealerTotal}
+                    dealerTotalAlt={this.state.dealerTotalAlt}
+                    dealerCards={this.state.dealerCards}
                     gameMsg={this.state.gameMsg}
-                    //For Cardlist
-                    playerName={this.state.playerName}
-                    playerTotal={this.state.playerTotal}
-                    playerTotalAlt={this.state.playerTotalAlt}
-                    playerCards={this.state.playerCards}
-                    //For Controls
-                    bet={this.state.bet}
-                    chips={this.state.chips}
-                    isPlaying={this.state.isPlaying}
-                    makeBet={this.makeBet}
-                    readyClicked={this.readyClicked}
-                    hitClicked={this.hitClicked}
-                    stayClicked={this.stayClicked}
-                    clearBet={this.clearBet}
-                    playerID={this.state.playerID}
-                    //For MiniGame
-                    miniGame={this.state.miniGame}
-                    options={options}
-                    handleOnComplete={this.handleOnComplete}
-                    //For Powers
-                    powers={this.state.powers}
-                    usePower={this.usePower}
                   />
-                )}
-            </div>
-          )}
+                </div>
+              </div>
+            ) : (
+              <PlayerScreen
+                // playersInGame={this.state.playersInGame}
+                socketId={this.state.playerID}
+                // For Game Message
+                gameMsg={this.state.gameMsg}
+                //For Cardlist
+                playerName={this.state.playerName}
+                playerTotal={this.state.playerTotal}
+                playerTotalAlt={this.state.playerTotalAlt}
+                playerCards={this.state.playerCards}
+                //For Controls
+                bet={this.state.bet}
+                chips={this.state.chips}
+                isPlaying={this.state.isPlaying}
+                makeBet={this.makeBet}
+                readyClicked={this.readyClicked}
+                hitClicked={this.hitClicked}
+                stayClicked={this.stayClicked}
+                clearBet={this.clearBet}
+                playerID={this.state.playerID}
+                //For MiniGame
+                miniGame={this.state.miniGame}
+                options={options}
+                handleOnComplete={this.handleOnComplete}
+                //For Powers
+                powers={this.state.powers}
+                usePower={this.usePower}
+              />
+            )}
+          </div>
+        )}
       </div>
     );
   }

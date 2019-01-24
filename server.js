@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 4000;
-const axios = require('axios');
+const axios = require("axios");
 
-const socketio = require('socket.io');
+const socketio = require("socket.io");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -24,31 +24,32 @@ if (process.env.NODE_ENV === "production") {
 // );
 
 // Adding Classes
-const Player = require('./classes/Player')
+const Player = require("./classes/Player");
 
 // Global Variables
 let player = {};
 let players = [];
 
 // Start the API server
-const expressServer = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+const expressServer = app.listen(PORT, () =>
+  console.log(`Listening on port ${PORT}`)
+);
 const io = socketio(expressServer);
 
-
 // VARIABLES!!!!!
-const cards = require('./cards.json')
+const cards = require("./cards.json");
 let ready = 0;
 let deck = [];
 let dealerCards = [];
 let dealerTotal = 0;
 let dealerTotalAlt = 0;
-let tableID = '';
-let status = '';
+let tableID = "";
+let status = "";
 let stay = 0;
 let round = 0;
 
 // FUNCTIONS!!!!!!
-shuffle = (a) => {
+shuffle = a => {
   let k,
     t,
     i = a.length,
@@ -63,7 +64,7 @@ shuffle = (a) => {
     a[i] = t;
   }
   return a;
-}
+};
 
 // Function to shuffle deck
 checkDeck = deck => {
@@ -75,8 +76,8 @@ drawCards = (deck, playerCards, numberOfCards) => {
   var i;
   for (i = 1; i <= numberOfCards; i++) {
     let card = deck.pop();
-    console.log('this is added')
-    console.log(card.value)
+    console.log("this is added");
+    console.log(card.value);
     playerCards.push(card);
   }
   return playerCards;
@@ -84,7 +85,7 @@ drawCards = (deck, playerCards, numberOfCards) => {
 
 // Calculates the values
 calcCardTotal = (cards, eleven) => {
-  let sum = Object.keys(cards).reduce(function (total, card) {
+  let sum = Object.keys(cards).reduce(function(total, card) {
     let cardVal = Number(cards[card].cardValue);
     cardVal = cardVal === 1 && eleven ? 11 : cardVal;
     return Number(total) + cardVal;
@@ -94,12 +95,12 @@ calcCardTotal = (cards, eleven) => {
 
 // Check if player bust
 checkForBust = (t1, t2) => {
-  console.log(t1)
-  console.log(t2)
+  console.log(t1);
+  console.log(t2);
 
   let min = Math.min(t1, t2);
 
-  console.log(min)
+  console.log(min);
 
   if (min > 21) {
     status = "Over 21 - You Lose!!!";
@@ -122,90 +123,83 @@ checkDealerStatus = (dealerCards, playerTotal) => {
     (t2 <= 21 && t2 === playerTotal)
   ) {
     status = "Tie";
-  } else if (
-    (t1 <= 21 && t1 > playerTotal) ||
-    (t2 <= 21 && t2 > playerTotal)
-  ) {
+  } else if ((t1 <= 21 && t1 > playerTotal) || (t2 <= 21 && t2 > playerTotal)) {
     status = "Dealer wins!!!";
   } else if (
-    (t1 <= 21 && t1 < playerTotal) &&
-    (t2 <= 21 && t2 < playerTotal) && (playerTotal <= 21)) {
+    t1 <= 21 &&
+    t1 < playerTotal &&
+    (t2 <= 21 && t2 < playerTotal) &&
+    playerTotal <= 21
+  ) {
     status = "You Win!!!";
   }
 
   return status;
 };
 
-
-
 // Connection with socket server
-io.on('connection', socket => {
-
-  socket.emit('MSG From Server', {
+io.on("connection", socket => {
+  socket.emit("MSG From Server", {
     message: `Welcome to the socketio server! Your SocketID: ${socket.id}`,
     socketid: socket.id
   });
 
-  socket.on('MSG To Server', dataFromClient => {
+  socket.on("MSG To Server", dataFromClient => {
     console.log(dataFromClient.message);
   });
 
   // Logining In
-  socket.on('LOGIN', data => {
-
+  socket.on("LOGIN", data => {
     if (data.playerName.length === 0) {
-      return socket.emit('LOGIN_ERROR', 'Name is required.')
+      return socket.emit("LOGIN_ERROR", "Name is required.");
     }
 
-    socket.join('Room 1', () => {
+    socket.join("Room 1", () => {
       let rooms = Object.keys(socket.rooms);
-      console.log(rooms); // [ <socket.id>, 'room 237' ]    
-      io.to('Room 1').emit('ROOM_JOIN_SUCCESS', `${data.playerName} has joined the room`); // broadcast to everyone in the room
+      console.log(rooms); // [ <socket.id>, 'room 237' ]
+      io.to("Room 1").emit(
+        "ROOM_JOIN_SUCCESS",
+        `${data.playerName} has joined the room`
+      ); // broadcast to everyone in the room
     });
 
-    if (data.playerName === '/table') {
+    if (data.playerName === "/table") {
       console.log(data.playerName);
       tableID = data.playerID;
-      socket.emit('LOGIN_SUCCESS', {
+      socket.emit("LOGIN_SUCCESS", {
         table: true,
         playerName: data.playerName
       });
-    }
-    else {
-
+    } else {
       player = new Player(socket.id, data.playerName, players.length);
 
       players.push(player);
 
-      socket.emit('LOGIN_SUCCESS', player);
+      socket.emit("LOGIN_SUCCESS", player);
 
       console.log(players);
 
-      io.to('Room 1').emit('Number of Players', {
+      io.to("Room 1").emit("Number of Players", {
         numberOfPlayers: players.length,
         players: players
-      })
+      });
     }
-  })
-
-
-
-
+  });
 
   // ----------------------- GAME LOGIC -------------------------//
   // Player is ready
-  socket.on('Player is ready', data => {
+  socket.on("Player is ready", data => {
     ready += data.ready;
 
     for (var i = 0; i < players.length; i++) {
       if (players[i].socketId === data.playerID) {
-        players[i].bet = data.bet
+        players[i].bet = data.bet;
       }
     }
 
     // READY CHECK
     if (ready === players.length) {
-      console.log("SHOULD BE WORKING")
+      console.log("SHOULD BE WORKING");
 
       round += 1;
 
@@ -213,30 +207,31 @@ io.on('connection', socket => {
 
       // Deal Cards to players
       for (var i = 0; i < players.length; i++) {
-        drawCards(deck, players[i].hand, 2)
+        drawCards(deck, players[i].hand, 2);
       }
 
       // Deal Cards to dealer
-      drawCards(deck, dealerCards, 2)
+      drawCards(deck, dealerCards, 2);
 
       // Tells everyone in room
-      io.emit('Players are ready', {
+      io.emit("Players are ready", {
         playersInGame: players,
         dealerCards: dealerCards
-      })
+      });
 
-      console.log('tableid: ' + tableID);
+      console.log("tableid: " + tableID);
 
       // Tells the table only
-      io.to(tableID).emit('Table Cards', {
+      io.to(tableID).emit("Table Cards", {
         playersInGame: players,
         dealerCards: dealerCards
-      })
+      });
     }
-  })
+  });
 
   // Calculating Cards for each socket
-  socket.on('Calc', data => { // both Aces doesnt work
+  socket.on("Calc", data => {
+    // both Aces doesnt work
     dealerTotal = calcCardTotal(dealerCards, false);
     dealerTotalAlt = calcCardTotal(dealerCards, true);
 
@@ -247,20 +242,54 @@ io.on('connection', socket => {
     for (var i = 0; i < players.length; i++) {
       if (players[i].socketId === data.playerID) {
         if (players[i].powerStatus) {
-          newPlayerTotal = (calcCardTotal(data.playerCards, false) + players[i].powerUsed[0]);
-          newPlayerTotalAlt = (calcCardTotal(data.playerCards, true) + players[i].powerUsed[0]);
+          newPlayerTotal =
+            calcCardTotal(data.playerCards, false) + players[i].powerUsed[0];
+          newPlayerTotalAlt =
+            calcCardTotal(data.playerCards, true) + players[i].powerUsed[0];
           if (players[i].powerUsed[1]) {
-            newPlayerTotal = (calcCardTotal(data.playerCards, false) + players[i].powerUsed[0] + players[i].powerUsed[1]);
-            newPlayerTotalAlt = (calcCardTotal(data.playerCards, true) + players[i].powerUsed[0] + players[i].powerUsed[1]);
+            newPlayerTotal =
+              calcCardTotal(data.playerCards, false) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1];
+            newPlayerTotalAlt =
+              calcCardTotal(data.playerCards, true) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1];
           } else if (players[i].powerUsed[2]) {
-            newPlayerTotal = (calcCardTotal(data.playerCards, false) + players[i].powerUsed[0] + players[i].powerUsed[1] + players[i].powerUsed[2]);
-            newPlayerTotalAlt = (calcCardTotal(data.playerCards, true) + players[i].powerUsed[0] + players[i].powerUsed[1] + players[i].powerUsed[2]);
+            newPlayerTotal =
+              calcCardTotal(data.playerCards, false) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1] +
+              players[i].powerUsed[2];
+            newPlayerTotalAlt =
+              calcCardTotal(data.playerCards, true) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1] +
+              players[i].powerUsed[2];
           } else if (players[i].powerUsed[3]) {
-            newPlayerTotal = (calcCardTotal(data.playerCards, false) + players[i].powerUsed[0] + players[i].powerUsed[1] + players[i].powerUsed[3]);
-            newPlayerTotalAlt = (calcCardTotal(data.playerCards, true) + players[i].powerUsed[0] + players[i].powerUsed[1] + players[i].powerUsed[3]);
+            newPlayerTotal =
+              calcCardTotal(data.playerCards, false) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1] +
+              players[i].powerUsed[3];
+            newPlayerTotalAlt =
+              calcCardTotal(data.playerCards, true) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1] +
+              players[i].powerUsed[3];
           } else if (players[i].powerUsed[4]) {
-            newPlayerTotal = (calcCardTotal(data.playerCards, false) + players[i].powerUsed[0] + players[i].powerUsed[1] + players[i].powerUsed[3] + players[i].powerUsed[4]);
-            newPlayerTotalAlt = (calcCardTotal(data.playerCards, true) + players[i].powerUsed[0] + players[i].powerUsed[1] + players[i].powerUsed[3] + players[i].powerUsed[4]);
+            newPlayerTotal =
+              calcCardTotal(data.playerCards, false) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1] +
+              players[i].powerUsed[3] +
+              players[i].powerUsed[4];
+            newPlayerTotalAlt =
+              calcCardTotal(data.playerCards, true) +
+              players[i].powerUsed[0] +
+              players[i].powerUsed[1] +
+              players[i].powerUsed[3] +
+              players[i].powerUsed[4];
           }
         }
       }
@@ -274,26 +303,26 @@ io.on('connection', socket => {
     }
 
     // Tells everyone in room
-    socket.emit('Player Calc', {
+    socket.emit("Player Calc", {
       playerID: data.playerID,
       dealerTotal: dealerTotal,
       dealerTotalAlt: dealerTotalAlt,
       playerTotal: newPlayerTotal,
       playerTotalAlt: newPlayerTotalAlt,
       playersInGame: players
-    })
+    });
 
     // Tells the table only
-    io.to(tableID).emit('Table Calc', {
+    io.to(tableID).emit("Table Calc", {
       dealerTotal: dealerTotal,
       dealerTotalAlt: dealerTotalAlt,
       playersInGame: players
-    })
-  })
+    });
+  });
 
   // When a player hits
-  socket.on('Player clicked hit', data => {
-    console.log('Player has hit')
+  socket.on("Player clicked hit", data => {
+    console.log("Player has hit");
 
     for (var i = 0; i < players.length; i++) {
       if (players[i].socketId === data) {
@@ -302,163 +331,170 @@ io.on('connection', socket => {
     }
 
     // Tells everyone in room
-    socket.emit('Player has hit', {
+    socket.emit("Player has hit", {
       playerID: data,
       playersInGame: players
-    })
+    });
 
     // Tells the table only
-    io.to(tableID).emit('Table player hits', {
+    io.to(tableID).emit("Table player hits", {
       playersInGame: players
-    })
-  })
+    });
+  });
 
   // Check if player bust
-  socket.on('Check for bust', data => {
-    console.log('LOKKK AY MEEEEE')
-    console.log(players)
+  socket.on("Check for bust", data => {
+    console.log("LOKKK AY MEEEEE");
+    console.log(players);
 
     for (var i = 0; i < players.length; i++) {
       if (players[i].socketId === data) {
         checkForBust(players[i].playerTotal, players[i].playerTotalAlt);
         players[i].gameMsg = status;
-        if (players[i].gameMsg === 'Over 21 - You Lose!!!') {
+        if (players[i].gameMsg === "Over 21 - You Lose!!!") {
           players[i].chips = players[i].chips - players[i].bet;
         }
       }
     }
 
     // Tells everyone in room
-    socket.emit('Check player for busting', {
+    socket.emit("Check player for busting", {
       playerID: data,
       playersInGame: players,
       status: status
-    })
+    });
 
     // Tells the table only
-    io.to(tableID).emit('Check table for busting', {
+    io.to(tableID).emit("Check table for busting", {
       playersInGame: players
-    })
+    });
 
-    status = '';
-  })
+    status = "";
+  });
 
-// Check bust after stay
-socket.on('Player clicked Stay', data => {
-  console.log('Stay was clicked')
+  // Check bust after stay
+  socket.on("Player clicked Stay", data => {
+    console.log("Stay was clicked");
 
-  stay += data.stay
+    stay += data.stay;
 
-  let playersLeft = 0;
-
-  for (var i = 0; i < players.length; i++) {
-    if (players[i].gameMsg === '') {
-      playersLeft += 1
-    }
-  }
-
-  console.log('Stay: ' + stay)
-  console.log('Players Left: ' + playersLeft)
-
-  // TWO ACES DONES'T WORK IT IS ALWAYS 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-  if (stay === playersLeft) {
-
-    let newDealerTotal = Math.max(dealerTotal, dealerTotalAlt);
-
-    if (newDealerTotal === 22) {
-      newDealerTotal = 12
-    };
-
-    while (newDealerTotal < 17) {
-      drawCards(deck, dealerCards, 1);
-      dealerTotal = calcCardTotal(dealerCards, false);
-      dealerTotalAlt = calcCardTotal(dealerCards, true);
-
-      newDealerTotal = Math.max(dealerTotal, dealerTotalAlt);
-
-      if (dealerTotalAlt > 21) {
-        newDealerTotal = Math.min(dealerTotal, dealerTotalAlt);
-      }
-      console.log(newDealerTotal)
-    }
+    let playersLeft = 0;
 
     for (var i = 0; i < players.length; i++) {
-
-      let newPlayerTotal = Math.max(players[i].playerTotal, players[i].playerTotalAlt)
-
-      if (players[i].playerTotalAlt > 21) {
-        newPlayerTotal = Math.min(players[i].playerTotal, players[i].playerTotalAlt)
+      if (players[i].gameMsg === "") {
+        playersLeft += 1;
       }
-
-      if (Math.min(dealerTotal, dealerTotalAlt) > 21 && newPlayerTotal <= 21) {
-        players[i].gameMsg = 'You Win!!!';
-        players[i].chips = players[i].chips + (players[i].bet * 2);
-        players[i].powerStatus = false;
-      } else if (
-        (dealerTotal <= 21 && dealerTotal === newPlayerTotal) ||
-        (dealerTotalAlt <= 21 && dealerTotalAlt === newPlayerTotal)
-      ) {
-        players[i].gameMsg = 'Tie';
-        players[i].chips = players[i].chips + players[i].bet;
-        players[i].powerStatus = false;
-      } else if (
-        (dealerTotal <= 21 && dealerTotal > newPlayerTotal) ||
-        (dealerTotalAlt <= 21 && dealerTotalAlt > newPlayerTotal)
-      ) {
-        players[i].gameMsg = 'Dealer wins!!!';
-        players[i].chips = players[i].chips - players[i].bet;
-        players[i].powerStatus = false;
-      } else if (
-        (dealerTotal <= 21 && dealerTotal < newPlayerTotal) &&
-        (dealerTotalAlt <= 21 && dealerTotalAlt < newPlayerTotal) && (newPlayerTotal <= 21)
-      ) {
-        players[i].gameMsg = 'You Win!!!';
-        players[i].chips = players[i].chips + (players[i].bet * 2);
-        players[i].powerStatus = false;
-      }
-
     }
 
-    console.log('PLAYERSSSSSSS UPDATINGGGG')
-    console.log(players)
+    console.log("Stay: " + stay);
+    console.log("Players Left: " + playersLeft);
 
-    // Tells everyone in room
-    io.emit('Check bust when player stays', {
-      playersInGame: players
-    })
+    // TWO ACES DONES'T WORK IT IS ALWAYS 2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (stay === playersLeft) {
+      let newDealerTotal = Math.max(dealerTotal, dealerTotalAlt);
 
-    console.log('Dealer SHit')
-    console.log(dealerCards);
-    console.log(dealerTotal);
-    console.log(dealerTotalAlt);
+      if (newDealerTotal === 22) {
+        newDealerTotal = 12;
+      }
 
-    console.log('platersssss')
-    console.log(players)
+      while (newDealerTotal < 17) {
+        drawCards(deck, dealerCards, 1);
+        dealerTotal = calcCardTotal(dealerCards, false);
+        dealerTotalAlt = calcCardTotal(dealerCards, true);
 
-    // Tells the table only
-    io.to(tableID).emit('Check table bust when player stays', {
-      dealerCards: dealerCards,
-      dealerTotal: dealerTotal,
-      dealerTotalAlt: dealerTotalAlt,
-      playersInGame: players
-    })
-  }
-})
+        newDealerTotal = Math.max(dealerTotal, dealerTotalAlt);
+
+        if (dealerTotalAlt > 21) {
+          newDealerTotal = Math.min(dealerTotal, dealerTotalAlt);
+        }
+        console.log(newDealerTotal);
+      }
+
+      for (var i = 0; i < players.length; i++) {
+        let newPlayerTotal = Math.max(
+          players[i].playerTotal,
+          players[i].playerTotalAlt
+        );
+
+        if (players[i].playerTotalAlt > 21) {
+          newPlayerTotal = Math.min(
+            players[i].playerTotal,
+            players[i].playerTotalAlt
+          );
+        }
+
+        if (
+          Math.min(dealerTotal, dealerTotalAlt) > 21 &&
+          newPlayerTotal <= 21
+        ) {
+          players[i].gameMsg = "You Win!!!";
+          players[i].chips = players[i].chips + players[i].bet * 2;
+          players[i].powerStatus = false;
+        } else if (
+          (dealerTotal <= 21 && dealerTotal === newPlayerTotal) ||
+          (dealerTotalAlt <= 21 && dealerTotalAlt === newPlayerTotal)
+        ) {
+          players[i].gameMsg = "Tie";
+          players[i].chips = players[i].chips + players[i].bet;
+          players[i].powerStatus = false;
+        } else if (
+          (dealerTotal <= 21 && dealerTotal > newPlayerTotal) ||
+          (dealerTotalAlt <= 21 && dealerTotalAlt > newPlayerTotal)
+        ) {
+          players[i].gameMsg = "Dealer wins!!!";
+          players[i].chips = players[i].chips - players[i].bet;
+          players[i].powerStatus = false;
+        } else if (
+          dealerTotal <= 21 &&
+          dealerTotal < newPlayerTotal &&
+          (dealerTotalAlt <= 21 && dealerTotalAlt < newPlayerTotal) &&
+          newPlayerTotal <= 21
+        ) {
+          players[i].gameMsg = "You Win!!!";
+          players[i].chips = players[i].chips + players[i].bet * 2;
+          players[i].powerStatus = false;
+        }
+      }
+
+      console.log("PLAYERSSSSSSS UPDATINGGGG");
+      console.log(players);
+
+      // Tells everyone in room
+      io.emit("Check bust when player stays", {
+        playersInGame: players
+      });
+
+      console.log("Dealer SHit");
+      console.log(dealerCards);
+      console.log(dealerTotal);
+      console.log(dealerTotalAlt);
+
+      console.log("platersssss");
+      console.log(players);
+
+      // Tells the table only
+      io.to(tableID).emit("Check table bust when player stays", {
+        dealerCards: dealerCards,
+        dealerTotal: dealerTotal,
+        dealerTotalAlt: dealerTotalAlt,
+        playersInGame: players
+      });
+    }
+  });
 
   // Reset Game
-  socket.on('Reset Game', data => {
+  socket.on("Reset Game", data => {
     console.log(data);
 
     let checkingStatus = 0;
 
     for (var i = 0; i < players.length; i++) {
-      if (players[i].gameMsg === '') {
-        checkingStatus += 1
-      };
+      if (players[i].gameMsg === "") {
+        checkingStatus += 1;
+      }
     }
 
     if (checkingStatus === 0) {
-
       // The reset
       ready = 0;
       deck = [];
@@ -468,60 +504,60 @@ socket.on('Player clicked Stay', data => {
       stay = 0;
 
       for (var i = 0; i < players.length; i++) {
-        players[i].gameMsg = '';
+        players[i].gameMsg = "";
         players[i].bet = 0;
         players[i].playerTotal = 0;
         players[i].playerTotalAlt = 0;
         players[i].hand = [];
       }
 
-      console.log('data reset');
+      console.log("data reset");
       console.log(players);
 
       // I HAVE IT END AT THREE ROUNDS FOR TESTING CAN BE CHANGED LATER
-      if (round < 3) {
-
+      if (round < 7) {
         // INPUT MUSIC HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // MAYBE HAVE MUSIC PLAYED BY STATE
 
         // Delay for gameMsg and music
         delayForEffect = () => {
           setTimeout(() => {
+            console.log("SURIPRSE MOTHER FUCKA!!!!!!");
+            console.log("Round: " + round);
 
-            console.log('SURIPRSE MOTHER FUCKA!!!!!!')
-            console.log('Round: ' + round)
+            io.emit("Next Round", players);
 
-            io.emit('Next Round', players)
-
-            io.to(tableID).emit('Next Round Table', players)
-
+            io.to(tableID).emit("Next Round Table", players);
           }, 3000);
-        }
+        };
 
         delayForEffect();
-
-      }
-      else {
-
-        console.log('End Of Game!!!!!!!!!!')
+      } else {
+        console.log("End Of Game!!!!!!!!!!");
 
         // CODE FOR MULTIPLE WINNERS!!!!!!!!!!!!!!!!!!
         let topPlayerID;
         let topPlayer;
         let topPlayerValue;
 
-        topPlayerValue = Math.max.apply(Math, players.map(function (player) { return player.chips; }))
-        console.log('Top Player Value: ' + topPlayerValue)
+        topPlayerValue = Math.max.apply(
+          Math,
+          players.map(function(player) {
+            return player.chips;
+          })
+        );
+        console.log("Top Player Value: " + topPlayerValue);
 
         for (var i = 0; i < players.length; i++) {
-
           players[i].bet = 0;
 
           if (players[i].chips === topPlayerValue) {
             topPlayerID = players[i].socketId;
             topPlayer = players[i].playerName;
           }
-          players[i].gameMsg = `GAME OVER \n WINNER: ${topPlayer} \n CHIPS: ${topPlayerValue}`;
+          players[
+            i
+          ].gameMsg = `GAME OVER \n WINNER: ${topPlayer} \n CHIPS: ${topPlayerValue}`;
         }
 
         console.log(topPlayer);
@@ -532,54 +568,51 @@ socket.on('Player clicked Stay', data => {
         // INPUT MONGO-DB CODE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // USE topPlayerID, topPlayer, topPlayerValue
 
-        socket.emit('GAME OVER', players)
+        socket.emit("GAME OVER", players);
 
         delayForEffect2 = () => {
           setTimeout(() => {
-
-            console.log('RESET THE WHOLE GAME')
+            console.log("RESET THE WHOLE GAME");
 
             ready = 0;
             deck = [];
             dealerCards = [];
             dealerTotal = 0;
             dealerTotalAlt = 0;
-            status = '';
+            status = "";
             stay = 0;
             round = 0;
             player = {};
             players = [];
 
-            io.emit('New Game', 'YOU SHOULD SEE ME')
+            io.emit("New Game", "YOU SHOULD SEE ME");
 
-            io.to(tableID).emit('New Game Table', 'YOU SHOULD SEE ME TOO')
-
-          }, 3000);
-        }
+            io.to(tableID).emit("New Game Table", "YOU SHOULD SEE ME TOO");
+          }, 45000);
+        };
 
         delayForEffect2();
       }
     }
-  })
+  });
 
   // Using powers
-  socket.on('Use power', data => {
-
+  socket.on("Use power", data => {
     let value;
 
-    if (data.powerUsed === '+1') {
+    if (data.powerUsed === "+1") {
       value = 1;
-    } else if (data.powerUsed === '+2') {
+    } else if (data.powerUsed === "+2") {
       value = 2;
-    } else if (data.powerUsed === '+3') {
+    } else if (data.powerUsed === "+3") {
       value = 3;
-    } else if (data.powerUsed === '+4') {
+    } else if (data.powerUsed === "+4") {
       value = 4;
-    } else if (data.powerUsed === '+5') {
+    } else if (data.powerUsed === "+5") {
       value = 5;
     }
 
-    console.log('Value: ' + value);
+    console.log("Value: " + value);
 
     for (var i = 0; i < players.length; i++) {
       if (players[i].socketId === data.playerID) {
@@ -593,42 +626,35 @@ socket.on('Player clicked Stay', data => {
       }
     }
 
-    console.log('players')
-    console.log(players)
+    console.log("players");
+    console.log(players);
 
-    socket.emit('Player used power', players)
+    socket.emit("Player used power", players);
 
     // Do i need it to emit to table???
-  })
+  });
 
   // NUKE!!!!!!!!
-  socket.on('Nuke', data => {
-    console.log(data)
+  socket.on("Nuke", data => {
+    console.log(data);
 
     ready = 0;
     deck = [];
     dealerCards = [];
     dealerTotal = 0;
     dealerTotalAlt = 0;
-    status = '';
+    status = "";
     stay = 0;
     round = 0;
     player = {};
     players = [];
 
-    io.emit('TACTICAL NUKE INCOMING!', 'TACTICAL NUKE ACTIVATED!')
+    io.emit("TACTICAL NUKE INCOMING!", "TACTICAL NUKE ACTIVATED!");
 
-    io.to(tableID).emit('TACTICAL NUKE INCOMING!!', 'TACTICAL NUKE ACTIVATED!')
-  })
-
-
-  socket.on('disconnect', function () {
-    console.log('SocketID: ' + socket.id + ' disconnected');
+    io.to(tableID).emit("TACTICAL NUKE INCOMING!!", "TACTICAL NUKE ACTIVATED!");
   });
 
-})
-
-
-
-
-
+  socket.on("disconnect", function() {
+    console.log("SocketID: " + socket.id + " disconnected");
+  });
+});
