@@ -5,12 +5,12 @@ import Roulette from '../roulette';
 const GameMessage = props => {
   return (
     <div className="backdrop">
-      <p>{props.msg}</p>
+      <p>{props.msg}
 
       {props.miniGame ?
         <Roulette options={props.options} baseSize={80} onComplete={props.handleOnComplete} />
         : <div />}
-
+</p>
     </div>
   );
 };
