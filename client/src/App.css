@@ -271,6 +271,15 @@ button.chippsDisabled {
   text-align: center;
   background-color: #373b84a4;
   padding-bottom: 10px;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.welcomeText {
+  font-family: 'Permanent Marker', cursive;
+  color: whitesmoke;
+  outline-color: black;
+  outline-width: 3px;
+  -webkit-text-stroke: 2px rgb(199, 15, 190);
 }
 
 .form-group {
