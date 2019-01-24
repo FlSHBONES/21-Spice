@@ -78,7 +78,7 @@ const Controls = props => {
           </button>
         </span>
         <div style={{ marginTop: 30 }}>
-          <span className="totalDisplay">Chips:{props.chips}</span>
+          <span className="totalDisplay">Chips: {props.chips}</span>
         </div>
       </div>
     </div>

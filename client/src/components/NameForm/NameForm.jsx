@@ -4,10 +4,10 @@ import React from "react";
 function NameForm(props) {
   return (
     <form className="welcome">
-      <h1>WELCOME TO</h1>
-      <h2>Once a table is initiated, enter your name from a different device to join!</h2>
+      <h1 className='welcomeText'>WELCOME TO</h1>
+      <h2 className='welcomeText'>Once a table is initiated, enter your name from a different device to join!</h2>
       <div className="form-group">
-        <label htmlFor="welcome">Player:</label>
+        <label htmlFor="welcome">Player: </label>
         <input
           value={props.playerName}
           onChange={props.handleInputChange}
