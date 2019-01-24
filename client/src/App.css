@@ -158,10 +158,10 @@ button.chippsDisabled {
 .game-area {
   position: fixed;
   text-align: center;
-  left: 150px;
-  top: 75px;
   bottom: 0;
   right: 0;
+  top: 0;
+  left: 0;
 }
 
 .title-bar {
@@ -176,17 +176,19 @@ button.chippsDisabled {
 }
 
 #bjack-title {
-  height: 100%;
-  margin-left: 30px;
+  position: fixed;
+  height: 200px;
+  right: 10px;
+  top: 10px
 }
 
 #sidebar-wrapper {
   position: fixed;
-  top: 75px;
-  bottom: 0px;
+  height: 100%;
   width: 200px;
   background-color: rgba(0, 0, 0, 0.40);
   z-index: 1;
+  vertical-align: middle;
 }
 
 #mySidebar {
@@ -225,23 +227,27 @@ button.chippsDisabled {
 
 .character-icon {
   width: 100%;
-  padding-left: 10px;
+  padding-left: 5px;
+}
+
+.playercard-wrapper {
+  vertical-align: middle;
 }
 
 .character-box {
-  width: 50%;
-  float: left;
+  width: 60%;
+  vertical-align: middle;
+  margin: auto;
 }
 
 .player-name {
-  text-align: center;
+  margin: auto;
+  width: 100%;
   font-size: 16px;
-  width: 50%;
-  float: left;
 }
 
 .player-score {
-  font-size: 12px;
+  font-size: 18px;
 }
 
 .footer {
@@ -426,14 +432,29 @@ html, body {margin:0;padding:0;height:100% !important;}
   color: black;
 }
 
+.tableScreen {
+  position: absolute;
+  height: 100%;
+  width: 100%
+}
+
 .table {
   height: 100%;
   width: 100%;
 }
 
-.table-with-players {
+.empty-table {
+  position: absolute;
   height: 100%;
-  width: 100%;
+  left: 200px;
+  right: 0;
+}
+
+.table-with-players {
+  position: absolute;
+  height: 100%;
+  left: 200px;
+  right: 0;
 }
 
 .dealerSpace {
