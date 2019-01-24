@@ -4,6 +4,7 @@ import React from "react";
 const PlayerCard = props => {
     return (
         <button className={`w3-button player-box${props.numPlayers} player${props.playerNum}`}>
+
             <div className="playercard-wrapper">
                 <div className="character-box">
                     <img className="character-icon" src={`./assets/img/transparent/${props.avatar}`} />
@@ -12,6 +13,7 @@ const PlayerCard = props => {
                     <div>{props.playerName}</div>
                     <div className="player-score">{`$${props.chips}`}</div>
                 </div>
+
             </div>
         </button>
     );
