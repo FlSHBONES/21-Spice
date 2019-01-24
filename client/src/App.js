@@ -731,12 +731,12 @@ class App extends Component {
             <div>
               {this.state.tableStatus ? (
                 <div>
-                  <TitleBar round={this.state.round} nuke={this.nuke} />
+                  <TitleBar round={this.state.round} />
                   <MusicR1 />
                   <SideBar
                     playerData={this.state.playersInGame}
                     numPlayers={this.state.numberOfPlayers}
-
+                />
                   <div className="game-area">
                     <Table
                       playersInGame={this.state.playersInGame}
@@ -745,6 +745,7 @@ class App extends Component {
                       dealerTotalAlt={this.state.dealerTotalAlt}
                       dealerCards={this.state.dealerCards}
                       gameMsg={this.state.gameMsg}
+                      nuke={this.nuke}
                     />
                   </div>
                 </div>

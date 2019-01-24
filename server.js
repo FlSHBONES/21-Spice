@@ -516,7 +516,7 @@ io.on("connection", socket => {
       console.log(players);
 
       // I HAVE IT END AT THREE ROUNDS FOR TESTING CAN BE CHANGED LATER
-      if (round < 1) {
+      if (round < 5) {
         // INPUT MUSIC HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // MAYBE HAVE MUSIC PLAYED BY STATE
 

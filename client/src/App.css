@@ -177,6 +177,7 @@ button.chippsDisabled {
   position: fixed;
   top: 0px;
   z-index: 1;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 #bjack-logo {
@@ -187,7 +188,7 @@ button.chippsDisabled {
   position: fixed;
   height: 200px;
   right: 10px;
-  top: 10px
+  top: 10px;
   z-index: 100;
 }
 
@@ -467,6 +468,7 @@ html, body {margin:0;padding:0;height:100% !important;}
 }
 
 .dealerSpace {
+  margin-top:8%;
   height: 40%;
 }
 
@@ -568,7 +570,9 @@ html, body {margin:0;padding:0;height:100% !important;}
 
 
 
-
+.w3-bar-item {
+  margin-left: 50%;
+}
 
 
 .rounds {
