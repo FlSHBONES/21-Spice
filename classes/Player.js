@@ -8,7 +8,7 @@ class Player {
         this.playerTotalAlt = 0;
         this.gameMsg = "";
         this.bet = 0;
-        this.chips = 1000;
+        this.chips = 10000;
         this.powers = [];
         this.powerStatus = false;
         this.powerUsed = [];

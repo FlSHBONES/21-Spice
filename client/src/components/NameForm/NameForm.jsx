@@ -18,13 +18,13 @@ function NameForm(props) {
           id="nameForm"
         />
       </div>
-      <button type="submit" onClick={props.joinBTN} className="btn nameBTN">
+      <button type="submit" onClick={props.joinBTN} id='joinBTN'>
         Join
         </button>
-        <button onClick={props.createTableBTN} className="btn createTableBTN">
+        <button onClick={props.createTableBTN} id='createTableBTN'>
         Create a Table
         </button>
-      <button onClick='' className="btn nameBTN">
+      <button onClick='' id='leaderBoardBTN'>
         Leader Board
         </button>
     </form>
