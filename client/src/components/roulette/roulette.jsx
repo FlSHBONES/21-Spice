@@ -31,8 +31,8 @@ class Roulette extends React.Component {
   static defaultProps = {
     options:  ['item1', 'item2', 'item3', 'item4', 'item5'],
     baseSize: 275,
-    spinAngleStart: Math.random() * 10 + 10,
-    spinTimeTotal: Math.random() * 3 + 4 * 1000,
+    spinAngleStart: Math.floor(Math.random() * 70) + 10,
+    spinTimeTotal: Math.random() * 2 + 4 * 1000,
   };
 
   componentDidMount() {
@@ -131,11 +131,11 @@ class Roulette extends React.Component {
       const spinAngle = spinAngleStart - this.easeOut(this.state.spinTime, 0, spinAngleStart, spinTimeTotal);
       this.setState({
         startAngle: this.state.startAngle + spinAngle * Math.PI / 180,
-        spinTime: this.state.spinTime + 30,
+        spinTime: this.state.spinTime + Math.floor(Math.random() * 50) + 1,
       }, () => {
         this.drawRouletteWheel();
         clearTimeout(this.spinTimer);
-        this.spinTimer = setTimeout(() => this.rotate(), 30);
+        this.spinTimer = setTimeout(() => this.rotate(), Math.floor(Math.random() * 50) + 1);
       })
     }
   }
@@ -177,7 +177,7 @@ class Roulette extends React.Component {
           <canvas ref="canvas" width={baseSize * 2} height={baseSize * 2} className="roulette-canvas"></canvas>
         </div>
         <div className="roulette-container">
-          <input type="button" value="spin" onClick={this.handleOnClick} className="button btn" id="spin" />
+          <input type="button" value="spin" onClick={this.handleOnClick} className="button" id="spin" />
         </div>
       </div>
     );
@@ -185,4 +185,3 @@ class Roulette extends React.Component {
 }
 
 export default Roulette;
-

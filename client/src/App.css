@@ -90,6 +90,14 @@ button.btnDisabled:hover {
 button.chipps{
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  transition: all .2s ease-in-out;
+}
+
+
+button.chipps:hover{
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  transform: scale(1.1);
 }
 
 img.chips {
@@ -562,3 +570,10 @@ html, body {margin:0;padding:0;height:100% !important;}
 
 
 
+.rounds {
+  font-family: 'Squada One', cursive;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgb(31, 30, 30);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

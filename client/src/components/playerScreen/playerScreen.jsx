@@ -36,6 +36,8 @@ function PlayerScreen(props) {
             />
 
             <Powers powers={props.powers} usePower={props.usePower}/>
+
+            <h1 className='rounds'>Round: {props.round}</h1>
         </div>
     );
 }
