@@ -22,7 +22,7 @@ const Titlescreen = props => {
           </div>
         </div>
       </div>
-    </div>
+    </div>  
   );
 };
 
