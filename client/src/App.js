@@ -11,6 +11,7 @@ import TitleScreen from "./components/titlescreen";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import Musictitle from "./components/musictitle";
 import MusicR1 from "./components/musicR1";
+import API from "./utils/API";
 
 class App extends Component {
   state = {
@@ -37,7 +38,7 @@ class App extends Component {
     playersInGame: [],
     modal: false,
     showTitle: true,
-    roundNumber: 0
+    round: 0
   };
 
   componentDidMount() {
@@ -78,7 +79,8 @@ class App extends Component {
               dealerCards: data.dealerCards,
               playerCards: data.playersInGame[i].hand,
               playersInGame: data.playersInGame,
-              isPlaying: true
+              isPlaying: true,
+              round: data.round
             },
             () => {
               this.calcCards();
@@ -93,7 +95,8 @@ class App extends Component {
       this.setState(
         {
           dealerCards: data.dealerCards,
-          playersInGame: data.playersInGame
+          playersInGame: data.playersInGame,
+          round: data.round
         },
         () => {
           this.calcCards();
@@ -302,7 +305,8 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
 
@@ -332,7 +336,8 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
 
@@ -345,7 +350,7 @@ class App extends Component {
       console.log(newPlayersInGame);
 
       for (var i = 0; i < newPlayersInGame.length; i++) {
-        if (newPlayersInGame[i].socketId === data[i].socketId) {
+        if (newPlayersInGame[i].socketId === this.state.playerID) {
           this.setState(
             {
               playerTotal: data[i].playerTotal,
@@ -389,7 +394,8 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
 
@@ -419,9 +425,24 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
+
+
+    this.socket.on('Leader Board', data => {
+      console.log(data);
+
+      this.savePlayerData({
+        playerID: data.topPlayerID,
+        playerName: data.topPlayer,
+        chips: data.topPlayerValue
+      })
+
+    })
+
+
   }
 
   // A function to check server connection
@@ -432,7 +453,7 @@ class App extends Component {
       this.socket.emit("MSG To Server", {
         message: `SocketID: ${
           dataFromServer.socketid
-        } has connected to server!`,
+          } has connected to server!`,
         socketid: dataFromServer.socketid
       });
 
@@ -625,7 +646,9 @@ class App extends Component {
 
   handleOnComplete = value => {
     console.log("value of spin: " + value);
+    console.log(value)
     let newPowers = this.state.powers;
+    console.log(newPowers)
     newPowers.push(value);
 
     console.log(newPowers);
@@ -638,6 +661,7 @@ class App extends Component {
   };
 
   usePower = power => {
+    console.log(this.state.powers)
     console.log("Power was used!!!!");
     let newPowers = this.state.powers;
     let index = newPowers.indexOf(power);
@@ -664,6 +688,17 @@ class App extends Component {
       modal: !this.state.modal
     });
   };
+
+  // Saving top score
+  savePlayerData = data => {
+    API.saveBook({
+      playerID: data.playerID,
+      playerName: data.playerName,
+      chips: data.chips
+    });
+  }
+
+
 
   render() {
     const options = ["+1", "+2", "+3", "+4", "+5"];
@@ -692,54 +727,61 @@ class App extends Component {
             </Modal>
           </div>
         ) : (
-          <div>
-            {this.state.tableStatus ? (
-              <div>
-                <MusicR1 />
-                <div className="game-area">
-                  <Table
-                    playersInGame={this.state.playersInGame}
-                    numPlayers={this.state.playersInGame.length}
-                    dealerTotal={this.state.dealerTotal}
-                    dealerTotalAlt={this.state.dealerTotalAlt}
-                    dealerCards={this.state.dealerCards}
-                    gameMsg={this.state.gameMsg}
-                    nuke={this.nuke} 
-                  />
+
+            <div>
+              {this.state.tableStatus ? (
+                <div>
+                  <TitleBar round={this.state.round} nuke={this.nuke} />
+                  <MusicR1 />
+                  <SideBar
+                    playerData={this.state.playersInGame}
+                    numPlayers={this.state.numberOfPlayers}
+
+                  <div className="game-area">
+                    <Table
+                      playersInGame={this.state.playersInGame}
+                      numPlayers={this.state.playersInGame.length}
+                      dealerTotal={this.state.dealerTotal}
+                      dealerTotalAlt={this.state.dealerTotalAlt}
+                      dealerCards={this.state.dealerCards}
+                      gameMsg={this.state.gameMsg}
+                    />
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <PlayerScreen
-                // playersInGame={this.state.playersInGame}
-                socketId={this.state.playerID}
-                // For Game Message
-                gameMsg={this.state.gameMsg}
-                //For Cardlist
-                playerName={this.state.playerName}
-                playerTotal={this.state.playerTotal}
-                playerTotalAlt={this.state.playerTotalAlt}
-                playerCards={this.state.playerCards}
-                //For Controls
-                bet={this.state.bet}
-                chips={this.state.chips}
-                isPlaying={this.state.isPlaying}
-                makeBet={this.makeBet}
-                readyClicked={this.readyClicked}
-                hitClicked={this.hitClicked}
-                stayClicked={this.stayClicked}
-                clearBet={this.clearBet}
-                playerID={this.state.playerID}
-                //For MiniGame
-                miniGame={this.state.miniGame}
-                options={options}
-                handleOnComplete={this.handleOnComplete}
-                //For Powers
-                powers={this.state.powers}
-                usePower={this.usePower}
-              />
-            )}
-          </div>
-        )}
+              ) : (
+                  <PlayerScreen
+                    // playersInGame={this.state.playersInGame}
+                    socketId={this.state.playerID}
+                    // For Game Message
+                    gameMsg={this.state.gameMsg}
+                    //For Cardlist
+                    playerName={this.state.playerName}
+                    playerTotal={this.state.playerTotal}
+                    playerTotalAlt={this.state.playerTotalAlt}
+                    playerCards={this.state.playerCards}
+                    //For Controls
+                    bet={this.state.bet}
+                    chips={this.state.chips}
+                    isPlaying={this.state.isPlaying}
+                    makeBet={this.makeBet}
+                    readyClicked={this.readyClicked}
+                    hitClicked={this.hitClicked}
+                    stayClicked={this.stayClicked}
+                    clearBet={this.clearBet}
+                    playerID={this.state.playerID}
+                    //For MiniGame
+                    miniGame={this.state.miniGame}
+                    options={options}
+                    handleOnComplete={this.handleOnComplete}
+                    //For Powers
+                    powers={this.state.powers}
+                    usePower={this.usePower}
+                    //For Round
+                    round={this.state.round}
+                  />
+                )}
+            </div>
+          )}
       </div>
     );
   }

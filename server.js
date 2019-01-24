@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 4000;
-const axios = require("axios");
 
 const socketio = require("socket.io");
 
@@ -16,12 +15,12 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 // Add routes, both API and view
-// app.use(routes);
+app.use(routes);
 
 // Connect to the Mongo DB
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost/gamedb"
-// );
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/leaderBoardDB"
+);
 
 // Adding Classes
 const Player = require("./classes/Player");
@@ -85,7 +84,7 @@ drawCards = (deck, playerCards, numberOfCards) => {
 
 // Calculates the values
 calcCardTotal = (cards, eleven) => {
-  let sum = Object.keys(cards).reduce(function(total, card) {
+  let sum = Object.keys(cards).reduce(function (total, card) {
     let cardVal = Number(cards[card].cardValue);
     cardVal = cardVal === 1 && eleven ? 11 : cardVal;
     return Number(total) + cardVal;
@@ -216,7 +215,8 @@ io.on("connection", socket => {
       // Tells everyone in room
       io.emit("Players are ready", {
         playersInGame: players,
-        dealerCards: dealerCards
+        dealerCards: dealerCards,
+        round: round
       });
 
       console.log("tableid: " + tableID);
@@ -224,7 +224,8 @@ io.on("connection", socket => {
       // Tells the table only
       io.to(tableID).emit("Table Cards", {
         playersInGame: players,
-        dealerCards: dealerCards
+        dealerCards: dealerCards,
+        round: round
       });
     }
   });
@@ -435,7 +436,7 @@ io.on("connection", socket => {
           (dealerTotalAlt <= 21 && dealerTotalAlt === newPlayerTotal)
         ) {
           players[i].gameMsg = "Tie";
-          players[i].chips = players[i].chips + players[i].bet;
+          players[i].chips = players[i].chips;
           players[i].powerStatus = false;
         } else if (
           (dealerTotal <= 21 && dealerTotal > newPlayerTotal) ||
@@ -515,7 +516,7 @@ io.on("connection", socket => {
       console.log(players);
 
       // I HAVE IT END AT THREE ROUNDS FOR TESTING CAN BE CHANGED LATER
-      if (round < 7) {
+      if (round < 1) {
         // INPUT MUSIC HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // MAYBE HAVE MUSIC PLAYED BY STATE
 
@@ -542,7 +543,7 @@ io.on("connection", socket => {
 
         topPlayerValue = Math.max.apply(
           Math,
-          players.map(function(player) {
+          players.map(function (player) {
             return player.chips;
           })
         );
@@ -555,9 +556,7 @@ io.on("connection", socket => {
             topPlayerID = players[i].socketId;
             topPlayer = players[i].playerName;
           }
-          players[
-            i
-          ].gameMsg = `GAME OVER \n WINNER: ${topPlayer} \n CHIPS: ${topPlayerValue}`;
+          players[i].gameMsg = `GAME OVER \n WINNER: ${topPlayer} \n CHIPS: ${topPlayerValue}`;
         }
 
         console.log(topPlayer);
@@ -569,6 +568,12 @@ io.on("connection", socket => {
         // USE topPlayerID, topPlayer, topPlayerValue
 
         socket.emit("GAME OVER", players);
+
+        io.to(tableID).emit('Leader Board', {
+          topPlayerID: topPlayerID,
+          topPlayer: topPlayer,
+          topPlayerValue: topPlayerValue
+        });
 
         delayForEffect2 = () => {
           setTimeout(() => {
@@ -588,7 +593,7 @@ io.on("connection", socket => {
             io.emit("New Game", "YOU SHOULD SEE ME");
 
             io.to(tableID).emit("New Game Table", "YOU SHOULD SEE ME TOO");
-          }, 45000);
+          }, 30000);
         };
 
         delayForEffect2();
@@ -654,7 +659,7 @@ io.on("connection", socket => {
     io.to(tableID).emit("TACTICAL NUKE INCOMING!!", "TACTICAL NUKE ACTIVATED!");
   });
 
-  socket.on("disconnect", function() {
+  socket.on("disconnect", function () {
     console.log("SocketID: " + socket.id + " disconnected");
   });
 });
