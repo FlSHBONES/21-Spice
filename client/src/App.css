@@ -188,6 +188,7 @@ button.chippsDisabled {
   height: 200px;
   right: 10px;
   top: 10px
+  z-index: 100;
 }
 
 #sidebar-wrapper {
