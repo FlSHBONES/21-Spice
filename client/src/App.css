@@ -3,7 +3,6 @@ body {
   font-size: 20px;
   font-family: helvetica;
   /* background-color: royalblue; */
-  background-image: url('http://cheerspokernh.com/wp-content/uploads/2018/02/bigstock-poker-table-background-26587844-2-1.jpg');
   background-size: 100%;
 }
 
@@ -286,8 +285,15 @@ button.chippsDisabled {
   margin-bottom: 10px;
 }
 
+.table-player-wrapper {
+  height: 100%;
+}
+
 .playerScreen {
   height: 100%;
+  background-size: cover;
+  background-image: url('http://cheerspokernh.com/wp-content/uploads/2018/02/bigstock-poker-table-background-26587844-2-1.jpg');
+
 }
 
 .height-100 {

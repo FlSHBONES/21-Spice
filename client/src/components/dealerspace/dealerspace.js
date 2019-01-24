@@ -17,7 +17,7 @@ const DealerSpace = props => {
       <div className="dealersCards">
         {props.cards.map((card, index) => (
           // eslint-disable-next-line
-          <img key={card.code} src={card.images.png} className={`Card-${index}`} height="250px" />
+          <img key={card.code} src={card.images.png} className={`Card-${index}`} height="200px" />
         ))}
       </div>
     </div>

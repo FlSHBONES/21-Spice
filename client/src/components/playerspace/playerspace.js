@@ -17,7 +17,7 @@ const PlayerSpace = props => {
       <div className="playersCards">
         {props.cards.map((card, index) => (
           // eslint-disable-next-line
-          <img key={card.code} src={card.images.png} className={`Card-Num-${index}`} height="200px" />
+          <img key={card.code} src={card.images.png} className={`Card-Num-${index}`} height="180px" />
         ))}
       </div>
     </div>
