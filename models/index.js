@@ -1,3 +1,3 @@
 module.exports = {
-  LeaderBoard: require("./LeaderBoard")
+  Book: require("./book")
 };
