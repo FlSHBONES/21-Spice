@@ -216,7 +216,8 @@ io.on("connection", socket => {
       // Tells everyone in room
       io.emit("Players are ready", {
         playersInGame: players,
-        dealerCards: dealerCards
+        dealerCards: dealerCards,
+        round: round
       });
 
       console.log("tableid: " + tableID);
@@ -224,7 +225,8 @@ io.on("connection", socket => {
       // Tells the table only
       io.to(tableID).emit("Table Cards", {
         playersInGame: players,
-        dealerCards: dealerCards
+        dealerCards: dealerCards,
+        round: round
       });
     }
   });
@@ -515,7 +517,7 @@ io.on("connection", socket => {
       console.log(players);
 
       // I HAVE IT END AT THREE ROUNDS FOR TESTING CAN BE CHANGED LATER
-      if (round < 7) {
+      if (round < 5) {
         // INPUT MUSIC HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // MAYBE HAVE MUSIC PLAYED BY STATE
 
@@ -555,9 +557,7 @@ io.on("connection", socket => {
             topPlayerID = players[i].socketId;
             topPlayer = players[i].playerName;
           }
-          players[
-            i
-          ].gameMsg = `GAME OVER \n WINNER: ${topPlayer} \n CHIPS: ${topPlayerValue}`;
+          players[i].gameMsg = `GAME OVER \n WINNER: ${topPlayer} \n CHIPS: ${topPlayerValue}`;
         }
 
         console.log(topPlayer);
@@ -588,7 +588,7 @@ io.on("connection", socket => {
             io.emit("New Game", "YOU SHOULD SEE ME");
 
             io.to(tableID).emit("New Game Table", "YOU SHOULD SEE ME TOO");
-          }, 45000);
+          }, 30000);
         };
 
         delayForEffect2();

@@ -4,7 +4,7 @@ import "./titlescreen.css";
 const Titlescreen = props => {
   return (
     <div>
-      <video id="title-video" className="myVideo" loop muted autoPlay>
+      <video id="title-video" className="myVideo" loop muted playsinline autoPlay>
         <source src={"./assets/vid/21_VICE_INTRO.mp4"} type="video/mp4" />
         Your browser does not support the video tag.
       </video>

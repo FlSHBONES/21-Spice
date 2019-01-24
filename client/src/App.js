@@ -12,6 +12,7 @@ import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import Musictitle from "./components/musictitle";
 import MusicR1 from "./components/musicR1";
 
+
 class App extends Component {
   state = {
     playerID: "",
@@ -37,7 +38,7 @@ class App extends Component {
     playersInGame: [],
     modal: false,
     showTitle: true,
-    roundNumber: 0
+    round: 0
   };
 
   componentDidMount() {
@@ -78,7 +79,8 @@ class App extends Component {
               dealerCards: data.dealerCards,
               playerCards: data.playersInGame[i].hand,
               playersInGame: data.playersInGame,
-              isPlaying: true
+              isPlaying: true,
+              round: data.round
             },
             () => {
               this.calcCards();
@@ -93,7 +95,8 @@ class App extends Component {
       this.setState(
         {
           dealerCards: data.dealerCards,
-          playersInGame: data.playersInGame
+          playersInGame: data.playersInGame,
+          round: data.round
         },
         () => {
           this.calcCards();
@@ -302,7 +305,8 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
 
@@ -332,7 +336,8 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
 
@@ -345,7 +350,7 @@ class App extends Component {
       console.log(newPlayersInGame);
 
       for (var i = 0; i < newPlayersInGame.length; i++) {
-        if (newPlayersInGame[i].socketId === data[i].socketId) {
+        if (newPlayersInGame[i].socketId === this.state.playerID) {
           this.setState(
             {
               playerTotal: data[i].playerTotal,
@@ -389,7 +394,8 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
 
@@ -419,7 +425,8 @@ class App extends Component {
         powerUsed: [],
         playersInGame: [],
         modal: false,
-        showTitle: true
+        showTitle: true,
+        round: 0
       });
     });
   }
@@ -625,7 +632,9 @@ class App extends Component {
 
   handleOnComplete = value => {
     console.log("value of spin: " + value);
+    console.log(value)
     let newPowers = this.state.powers;
+    console.log(newPowers)
     newPowers.push(value);
 
     console.log(newPowers);
@@ -638,6 +647,7 @@ class App extends Component {
   };
 
   usePower = power => {
+    console.log(this.state.powers)
     console.log("Power was used!!!!");
     let newPowers = this.state.powers;
     let index = newPowers.indexOf(power);
@@ -695,7 +705,7 @@ class App extends Component {
           <div>
             {this.state.tableStatus ? (
               <div>
-                <TitleBar nuke={this.nuke} />
+                <TitleBar round={this.state.round} nuke={this.nuke} />
                 <MusicR1 />
                 <SideBar
                   playerData={this.state.playersInGame}
@@ -740,6 +750,8 @@ class App extends Component {
                 //For Powers
                 powers={this.state.powers}
                 usePower={this.usePower}
+                //For Round
+                round={this.state.round}
               />
             )}
           </div>
