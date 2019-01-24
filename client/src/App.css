@@ -13,20 +13,20 @@ body {
   left: 0;
   right: 0;
   position: fixed;
-  background: rgba(200, 200, 200, 0.2);
+  background: rgba(0, 0, 0, 0.534);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+  z-index: 1;
 }
 
 .backdrop p {
   text-align: center;
   margin: 100px 0;
-  padding: 100px 0;
+  padding: 50px 0;
   font-size: 5em;
   font-weight: bolder;
   background-color: black;
-  border-color: darkred;
-  border-style: solid;
-  border-width: 5px;
-  cursor: pointer;
+  z-index: 1;
 }
 
 .cardTable {
@@ -85,28 +85,29 @@ button.bet {
   border-radius: 50px;
   border: 4px dashed rgb(37, 18, 18);
   margin: 4px;
+  transition: all .2s ease-in-out;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 button.bet:hover {
   border-color: gray;
   color: white;
-  width: 70px;
-  height: 70px;
-}
-
-button.bet2_5 {
-  background-color: green;
-}
-
-button.bet5 {
-  background-color: royalblue;
-}
-
-button.bet10 {
-  background-color: red;
+  transform: scale(1.1);
 }
 
 button.bet25 {
+  background-color: green;
+}
+
+button.bet50 {
+  background-color: royalblue;
+}
+
+button.bet100 {
+  background-color: red;
+}
+
+button.bet150 {
   background-color: goldenrod;
 }
 button.betDisabled {
@@ -120,6 +121,7 @@ button.betDisabled {
   border: 4px dashed gray;
   margin: 4px;
   color: gray;
+  z-index: 0;
 }
 
 .space {
@@ -132,6 +134,7 @@ button.betDisabled {
   border-radius: 10px;
   border-color: whitesmoke;
   opacity: 0.95;
+  z-index: -1;
 }
 
 .totalDisplay {
@@ -139,6 +142,7 @@ button.betDisabled {
   padding: 5px 100px;
   border-radius: 10px;
   opacity: 0.95;
+  z-index: -1;
 }
 
 .login {

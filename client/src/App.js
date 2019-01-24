@@ -680,7 +680,9 @@ class App extends Component {
           <div>
             {this.state.tableStatus ?
               <div>
-                <TitleBar />
+                <TitleBar 
+                nuke={this.nuke}
+                />
                 <SideBar
                   playerData={this.state.playersInGame}
                   numPlayers={this.state.numberOfPlayers}
