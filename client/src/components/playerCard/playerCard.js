@@ -7,7 +7,7 @@ const PlayerCard = props => {
     return (
         <button className={`w3-button player-box${props.numPlayers} player${props.playerNum}`}>
             <div className="character-box">
-                <img className="character-icon w3-circle" src={`./assets/img/${images[props.playerNum]}`} />
+                <img className="character-icon w3-circle" src={`./assets/img/${images[props.playerNum]}`} alt="cards" />
             </div>
             <div className="player-name">
                 <p>{props.playerName}</p>

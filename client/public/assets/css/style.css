@@ -20,11 +20,6 @@ html,body,h1,h2,h3,h4,h5 {
     height: 500px;
 }
 
-body {
-    background-image: url("./assets/img/FH_Gaming_Main-new.jpg"); 
-    background-size: cover
-}
-
 .stats-box,
 .chat-box {
     background-color: aliceblue;

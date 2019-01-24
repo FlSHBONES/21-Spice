@@ -4,7 +4,7 @@ import Sound from "react-sound";
 class Music extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { position: 0 };
+    this.state = { position: 0.000000000000000001 };
     this.handlePlaying = this.handlePlaying.bind(this);
     this.handleFinishedPlaying = this.handleFinishedPlaying.bind(this);
   }
@@ -16,6 +16,8 @@ class Music extends React.Component {
   handleFinishedPlaying() {
     this.setState({ position: 0 });
   }
+
+  
   render() {
     return (
       <Sound
