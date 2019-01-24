@@ -16,6 +16,7 @@ function NameForm(props) {
           className="form-control"
           placeholder="Enter Your Name"
           id="nameForm"
+          maxlength="15"
         />
       </div>
       <button type="submit" onClick={props.joinBTN} id='joinBTN'>

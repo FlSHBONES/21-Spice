@@ -727,6 +727,7 @@ class App extends Component {
             </Modal>
           </div>
         ) : (
+
             <div>
               {this.state.tableStatus ? (
                 <div>
@@ -735,7 +736,7 @@ class App extends Component {
                   <SideBar
                     playerData={this.state.playersInGame}
                     numPlayers={this.state.numberOfPlayers}
-                  />
+
                   <div className="game-area">
                     <Table
                       playersInGame={this.state.playersInGame}
