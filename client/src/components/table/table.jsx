@@ -8,10 +8,13 @@ import PlayerSpace from "../playerspace";
 function Table(props) {
   return (
     <div className="table">
-      {/* <video id="background-video" loop autoPlay>
-        <source src={"./assets/vid/tableloop.mp4"} type="video/mp4" />
-      </video> */}
 
+      <div className="fullscreen-bg">
+        <video loop muted autoPlay class="fullscreen-bg__video">
+          <source src={"./assets/vid/tableloop.mp4"} type="video/mp4" />
+        </video>
+      </div>
+      
       {props.numPlayers > 0 ? (
         <div className="table-with-players">
           <DealerSpace
