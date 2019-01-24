@@ -12,8 +12,7 @@ const Titlescreen = props => {
       <div className="box-wrapper loading">
         <div className="box">
           <div className="content">
-
-              <img src="./assets/img/21_vice_logo.png" alt="21Vice" id="logo" />
+            <img src="./assets/img/21_vice_logo.png" alt="21Vice" id="logo" />
 
             <button id="myBtn" onClick={props.toggle}>
               <strong>Let's Play</strong>
@@ -21,7 +20,7 @@ const Titlescreen = props => {
           </div>
         </div>
       </div>
-    </div>  
+    </div>
   );
 };
 
