@@ -21,40 +21,34 @@ const Controls = props => {
       <div className="mid">
         <span>
           <button
-            onClick={() => props.makeBet(1)}
-            className={"bet" + isDisabled()}
-            disabled={props.isPlaying}
-          >
-            1
+            onClick={() => props.makeBet(5)}
+            className={"chipps" + isDisabled()}
+            disabled={props.isPlaying}>
+            <img src="./assets/img/chips/5.png" alt="chip5" className='chips' />
+          </button>
+          <button
+            onClick={() => props.makeBet(10)}
+            className={"chipps" + isDisabled()}
+            disabled={props.isPlaying}>
+            <img src="./assets/img/chips/10.png" alt="chip10" className='chips' />
           </button>
           <button
             onClick={() => props.makeBet(25)}
-            className={"bet" + isDisabled() + " bet25"}
-            disabled={props.isPlaying}
-          >
-            25
+            className={"chipps" + isDisabled()}
+            disabled={props.isPlaying}>
+            <img src="./assets/img/chips/25.png" alt="chip25" className='chips' />
           </button>
           <button
             onClick={() => props.makeBet(50)}
-            className={"bet" + isDisabled() + " bet50"}
-            disabled={props.isPlaying}
-          >
-            50
+            className={"chipps" + isDisabled()}
+            disabled={props.isPlaying}>
+            <img src="./assets/img/chips/50.png" alt="chip50" className='chips' />
           </button>
           <button
-            onClick={() => props.makeBet(100)}
-            className={"bet" + isDisabled() + " bet100"}
-            disabled={props.isPlaying}
-          >
-            100
-          </button>
-
-          <button
-            onClick={() => props.makeBet(150)}
-            className={"bet" + isDisabled() + " bet150"}
-            disabled={props.isPlaying}
-          >
-            150
+            onClick={() => props.makeBet(500)}
+            className={"chipps" + isDisabled()}
+            disabled={props.isPlaying}>
+            <img src="./assets/img/chips/500.png" alt="chip500" className='chips' />
           </button>
         </span>
         <span style={{ paddingLeft: 40 }}>

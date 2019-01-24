@@ -680,8 +680,8 @@ class App extends Component {
           <div>
             {this.state.tableStatus ?
               <div>
-                <TitleBar 
-                nuke={this.nuke}
+                <TitleBar
+                  nuke={this.nuke}
                 />
                 <SideBar
                   playerData={this.state.playersInGame}
@@ -700,40 +700,43 @@ class App extends Component {
                 </div>
               </div>
               :
-              <PlayerScreen
-                // playersInGame={this.state.playersInGame}
-                socketId={this.state.playerID}
 
-                // For Game Message
-                gameMsg={this.state.gameMsg}
+                <PlayerScreen
+                  // playersInGame={this.state.playersInGame}
+                  socketId={this.state.playerID}
 
-                //For Cardlist
-                playerName={this.state.playerName}
-                playerTotal={this.state.playerTotal}
-                playerTotalAlt={this.state.playerTotalAlt}
-                playerCards={this.state.playerCards}
+                  // For Game Message
+                  gameMsg={this.state.gameMsg}
 
-                //For Controls
-                bet={this.state.bet}
-                chips={this.state.chips}
-                isPlaying={this.state.isPlaying}
-                makeBet={this.makeBet}
-                readyClicked={this.readyClicked}
-                hitClicked={this.hitClicked}
-                stayClicked={this.stayClicked}
-                clearBet={this.clearBet}
-                playerID={this.state.playerID}
+                  //For Cardlist
+                  playerName={this.state.playerName}
+                  playerTotal={this.state.playerTotal}
+                  playerTotalAlt={this.state.playerTotalAlt}
+                  playerCards={this.state.playerCards}
+
+                  //For Controls
+                  bet={this.state.bet}
+                  chips={this.state.chips}
+                  isPlaying={this.state.isPlaying}
+                  makeBet={this.makeBet}
+                  readyClicked={this.readyClicked}
+                  hitClicked={this.hitClicked}
+                  stayClicked={this.stayClicked}
+                  clearBet={this.clearBet}
+                  playerID={this.state.playerID}
 
 
-                //For MiniGame
-                miniGame={this.state.miniGame}
-                options={options}
-                handleOnComplete={this.handleOnComplete}
+                  //For MiniGame
+                  miniGame={this.state.miniGame}
+                  options={options}
+                  handleOnComplete={this.handleOnComplete}
 
-                //For Powers
-                powers={this.state.powers}
-                usePower={this.usePower}
-              />
+                  //For Powers
+                  powers={this.state.powers}
+                  usePower={this.usePower}
+                />
+
+              
             }
           </div>
         }
