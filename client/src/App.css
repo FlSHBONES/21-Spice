@@ -158,7 +158,7 @@ button.chippsDisabled {
 .game-area {
   position: fixed;
   text-align: center;
-  left: 200px;
+  left: 150px;
   top: 75px;
   bottom: 0;
   right: 0;
@@ -242,23 +242,6 @@ button.chippsDisabled {
 
 .player-score {
   font-size: 12px;
-}
-
-.player0 {
-  background-color: #373b84;
-}
-
-.player1 {
-  background-color: #1593ac;
-}
-
-.player2 {
-
-  background-color: #df773e;
-}
-
-.player3 {
-  background-color: #e21887;
 }
 
 .footer {
