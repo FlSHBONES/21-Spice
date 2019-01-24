@@ -436,7 +436,7 @@ io.on("connection", socket => {
           (dealerTotalAlt <= 21 && dealerTotalAlt === newPlayerTotal)
         ) {
           players[i].gameMsg = "Tie";
-          players[i].chips = players[i].chips + players[i].bet;
+          players[i].chips = players[i].chips;
           players[i].powerStatus = false;
         } else if (
           (dealerTotal <= 21 && dealerTotal > newPlayerTotal) ||
