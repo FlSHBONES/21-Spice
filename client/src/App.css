@@ -170,7 +170,7 @@ button.betDisabled {
 }
 
 .game-area {
-  position: absolute;
+  position: fixed;
   text-align: center;
   left: 200px;
   top: 75px;
@@ -200,6 +200,7 @@ button.betDisabled {
   bottom: 0px;
   width: 200px;
   background-color: #1593ac;
+  z-index: 1;
 }
 
 #mySidebar {
@@ -313,21 +314,71 @@ button.betDisabled {
 
 html, body {margin:0;padding:0;height:100% !important;}
 
-#myVideo {
+.myVideo {
   position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
+  min-width: 100%;
   min-height: 100%;
   z-index: -9999999;
+}
+
+#table-video {
+  position: fixed;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#title-video {
+  position: fixed;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100;
+}
+
+.fullscreen-bg__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .fullscreen-bg__video {
+    width: 300%;
+    left: -100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .fullscreen-bg__video {
+    display: none;
+  }
 }
 
 .nameBTN {
   margin: 20px;
   background: #1593ac
 }
-
-
 
 .modal {
   background-color: rgba(0, 0, 0, 0.527);

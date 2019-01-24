@@ -404,10 +404,6 @@ class App extends Component {
 
   }
 
-
-
-
-
   // A function to check server connection
   checkConnection() {
     this.socket.on('MSG From Server', dataFromServer => {
@@ -431,6 +427,55 @@ class App extends Component {
       [name]: value
     });
   };
+
+  // Join BTN
+  createTableBTN = event => {
+    event.preventDefault();
+    console.log('create table clicked')
+
+    // Initializes the login for server
+    this.socket.emit('LOGIN', {
+      playerID: this.socket.id,
+      playerName: "/table"
+    });
+
+    // An alert message will appear when text area is empty
+    this.socket.on('LOGIN_ERROR', error => {
+      alert(error);
+    })
+
+    // Renders the state when login is successful
+    this.socket.on('LOGIN_SUCCESS', player => {
+
+      if (player.playerName === '/table') {
+        this.setState({
+          tableStatus: true,
+          showTitle: false
+        })
+      }
+      else {
+        this.setState({
+          displayPlayerName: player.playerName,
+          showTitle: false
+        })
+      }
+    })
+
+    // Shows message when join is successful
+    this.socket.on('ROOM_JOIN_SUCCESS', msg => {
+      console.log(msg);
+    })
+
+    // Lets everyone in Room 1 see number of players
+    this.socket.on('Number of Players', data => {
+      this.setState({
+        numberOfPlayers: data.numberOfPlayers,
+        playersInGame: data.players
+      }, () => {
+        console.log(this.state.playersInGame);
+      })
+    })
+  }
 
   // Join BTN
   joinBTN = event => {
@@ -625,6 +670,7 @@ class App extends Component {
                   value={this.state.playerName}
                   handleInputChange={this.handleInputChange}
                   joinBTN={this.joinBTN}
+                  createTableBTN={this.createTableBTN}
                   toggle={this.toggle}
                 />
               </ModalBody>
@@ -642,6 +688,7 @@ class App extends Component {
                   numPlayers={this.state.numberOfPlayers}
                 />
                 <div className="game-area">
+    
                   <Table
                     playersInGame={this.state.playersInGame}
                     numPlayers={this.state.playersInGame.length}
