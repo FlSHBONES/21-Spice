@@ -8,12 +8,12 @@
 
 /* Add some content at the bottom of the video/page */
 .box {
+  top: -20.5%;
   position: fixed;
   bottom: 0;
-
   color: #f1f1f1;
   width: 100%;
-  padding: 20px;
+  padding: 15%;
 }
 
 /* Style the button used to pause/play the video */
@@ -21,11 +21,14 @@
   width: 200px;
   font-size: 18px;
   padding: 10px;
+  margin-left: 5%;
+  position:  static;
   border: none;
   background: #000;
   color: #fff;
   cursor: pointer;
   font-family: 'Permanent Marker', cursive;
+  z-index: 2;
 }
 
 #myBtn:hover {
@@ -41,9 +44,12 @@
 }
 
 #logo {
-  height: 75%;
-  width: 80%;
-  padding-left: 10%;
+  height: 55%;
+  width: 55%;
+  padding-left: 12%;
   position: relative;
-  top: 170px;
+  z-index: -1;
+
+  top: 10%;
+  bottom: -25%;
 }
