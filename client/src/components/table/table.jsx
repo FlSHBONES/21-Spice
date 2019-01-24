@@ -1,5 +1,4 @@
 import React from "react";
-import CardList from "../cardlist";
 import DealerSpace from "../dealerspace";
 import GameMessage from "../gamemessage";
 import PlayerSpace from "../playerspace";

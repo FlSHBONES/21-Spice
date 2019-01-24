@@ -14,8 +14,10 @@ class Music extends React.Component {
   }
 
   handleFinishedPlaying() {
-    this.setState({ position: 0 });
+    this.setState({ position: 0.000000000001 });
   }
+
+  
   render() {
     return (
       <Sound
