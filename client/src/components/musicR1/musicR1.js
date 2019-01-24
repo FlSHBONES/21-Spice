@@ -1,10 +1,10 @@
 import React from "react";
 import Sound from "react-sound";
 
-class Music extends React.Component {
+class MusicR1 extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { position: 0.000000000000000001 };
+    this.state = { position: 0 };
     this.handlePlaying = this.handlePlaying.bind(this);
     this.handleFinishedPlaying = this.handleFinishedPlaying.bind(this);
   }
@@ -14,14 +14,13 @@ class Music extends React.Component {
   }
 
   handleFinishedPlaying() {
-    this.setState({ position: 0 });
+    this.setState({ position: 0.000000000000001 });
   }
 
-  
   render() {
     return (
       <Sound
-        url="./assets/song/title.mp3"
+        url="./assets/song/round1.mp3"
         playStatus={Sound.status.PLAYING}
         position={this.state.position}
         onPlaying={this.handlePlaying}
@@ -30,4 +29,4 @@ class Music extends React.Component {
     );
   }
 }
-export default Music;
+export default MusicR1;
