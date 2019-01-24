@@ -5,6 +5,7 @@ const SideBar = props => {
     return (
         <div id="sidebar-wrapper">
             <nav id="mySidebar" className="w3-bar-block">
+                {props.msg}
                 {props.playerData.map(player => (
                     <PlayerCard
                         playerNum={player.playerNum}
