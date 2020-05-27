@@ -728,7 +728,7 @@ class App extends Component {
           </div>
         ) : (
 
-            <div>
+            <div className="table-player-wrapper">
               {this.state.tableStatus ? (
                 <div>
                   <TitleBar round={this.state.round} />
